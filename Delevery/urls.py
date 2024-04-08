@@ -9,4 +9,7 @@ urlpatterns = [
     
     # главное приложение
     path('', include('main.urls')),
+    
+    # профиль 
+    path('profile/', include('profile_user.urls')),
 ]
