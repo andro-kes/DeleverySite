@@ -25,7 +25,15 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    
+    # 3-rd party
+    'accounts',
 ]
+
+# Auth
+AUTH_USER_MODEL = 'accounts.AccountsModel'
+LOGIN_REDIRECT_URL = ''
+LOGOUT_REDIRECT_URL = ''
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
