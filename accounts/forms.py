@@ -3,6 +3,9 @@ from django.contrib.auth import get_user_model
 from django import forms
 
 class AccountCreationForm(UserCreationForm):
+    """ 
+    Форма для создания пользователей
+    """
     class Meta:
         model = get_user_model()
         fields = (

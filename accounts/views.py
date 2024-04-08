@@ -4,12 +4,21 @@ from django.views.generic.base import View
 from .forms import AccountCreationForm
 
 class AccountLoginView(LoginView):
+    """ 
+    Логин
+    """
     template_name = 'accounts/login.html'
 
 class AccountLogoutView(LogoutView):
+    """ 
+    Логаут
+    """
     pass
 
 class SignUpView(View):
+    """ 
+    Класс для регистрации пользователей
+    """
     template_name = 'accounts/signup.html'
     
     def get(self, request):
@@ -23,7 +32,7 @@ class SignUpView(View):
         form = AccountCreationForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('login')
+            return redirect('main')
         data = {
             'form': form,
         }
