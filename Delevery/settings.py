@@ -29,6 +29,7 @@ INSTALLED_APPS = [
     
     # 3-rd party
     'accounts',
+    'main',
 ]
 
 # Auth
