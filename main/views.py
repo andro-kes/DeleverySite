@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.views.generic.base import View
+from django.views.generic.detail import DetailView
 from .forms import SearchProductForm
 from .models import OrderModel
 
@@ -27,3 +28,8 @@ class MainView(View):
             'products': queryset,
         }
         return render(request, self.template_results_name, data)
+    
+class ProductDetailView(DetailView):
+    model = OrderModel
+    template_name = 'main/detail.html'
+    context_object_name = 'product'

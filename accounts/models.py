@@ -19,6 +19,7 @@ class AccountsModel(AbstractUser):
     list_pick_up_point = models.ManyToManyField(Cities, related_name='list_pick_up_point', blank=True)
     organization = models.CharField(max_length=50, null=True, blank=True)
     production = models.CharField(max_length=50, null=True, blank=True)
+    status = models.CharField(max_length=20, null=True)
     
     def __str__(self):
         return str(self.username)
