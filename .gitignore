@@ -1,0 +1,24 @@
+# Virtual environment
+venv/
+env/
+
+# Python and Django files
+*.pyc
+__pycache__/
+*.pyo
+*.pyd
+db.sqlite3
+media/
+
+# IDE and code editor files
+.vscode/
+.idea/
+.vs/
+
+# Temporary files
+*.log
+*.swp
+.DS_Store
+
+# Secret files and confidential data
+.env
