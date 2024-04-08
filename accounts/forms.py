@@ -10,11 +10,6 @@ class AccountCreationForm(UserCreationForm):
             'list_pick_up_point', 'password1', 'password2', 
             'organization', 'production', 'first_name', 'last_name',
         )
-    # address = models.ManyToManyField(Cities, related_name='address', null=True, blank=True)
-    # list_warehouse = models.ManyToManyField(Cities, related_name='list_warehouse', null=True, blank=True)
-    # list_pick_up_point = models.ManyToManyField(Cities, related_name='list_pick_up_point', null=True, blank=True)
-    # organization = models.CharField(max_length=50, null=True, blank=True)
-    # production = models.CharField(max_length=50, null=True, blank=True)
         widgets = {
             'address': forms.CheckboxSelectMultiple(
                 attrs = {
