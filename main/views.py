@@ -14,11 +14,9 @@ class MainView(View):
         return render(request, self.template_name, data)
     def post(self, request, *args, **kwargs):
         form = SearchProductForm(request.POST)
-        value = form.seacrh_field
-        if value:
-            queryset = OrderModel.objects.filter(category__icontains=value)
-        else:
-            queryset = ''
+        if form.is_valid():
+            value = form.cleaned_data['search_field']
+        queryset = OrderModel.objects.filter(category__icontains=value)
         data = {
             'products': queryset,
         }

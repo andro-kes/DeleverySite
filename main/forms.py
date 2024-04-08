@@ -1,8 +1,7 @@
-from django.forms import Form
 from django import forms
 
-class SearchProductForm(Form):
-    seacrh_field = forms.TextInput(attrs={
+class SearchProductForm(forms.Form):
+    search_field = forms.CharField(widget=forms.TextInput(attrs={
         'class': '',
         'placeholder': '',
-    })
+    }))
