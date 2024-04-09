@@ -1,1 +1,182 @@
-<!-- страница для регистрации -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="stylesheet" href="assets/css/reset.css">
+    <link rel="stylesheet" href="assets/css/fonts.css">
+    <link rel="stylesheet" href="assets/css/header.css">
+    <link rel="stylesheet" href="assets/css/registry.css">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/footer.css">
+
+    <title>Hack2024</title>
+</head>
+<body>
+    <div class="header">
+        <div class="header-main container">
+            <a href="/index.html" class="header__logo">Kodopes</a>
+            <div class="header-side">
+                <form class="header__search">
+                    <input type="text" required placeholder="Поиск">
+                    <button>
+                        <img src="assets/images/ui/search.svg" alt="Искать">
+                    </button>
+                </form>
+                <div class="header__nav">
+                    <a href="/registry.html" class="nav__account">
+                        <img src="assets/images/ui/user.svg" alt="Аккаунт">
+                    </a>
+                    <a href="#" class="nav__vk">
+                        <img src="assets/images/ui/vk.svg" alt="VK">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="cataloque">
+        <div class="cataloque-main container">
+            <div class="cataloque__nav">
+                <a href="#">Товары</a>
+                <a href="#">Заказы</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="registry">
+        <div class="registry-main container">
+            <h1 class="registry__title">
+                Регистрация
+
+            </h1>
+            <div class="registry__switch">
+                <div class="switch__btn _active" data-tab="_customer_tab">Покупатель</div>
+                <div class="switch__btn" data-tab="_company_tab">Компания</div>
+            </div>
+
+            <!-- Покупатель -->
+            <form class="registry__tab _customer_tab tab_active">
+                <div class="field_line">
+                    <div class="form__field">
+                        <h2 class="tab__title">Ваше имя: *</h2>
+                        <input type="text" required maxlength="50" placeholder="Введите имя">
+                    </div>
+                    <div class="form__field">
+                        <h2 class="tab__title">Ваша фамилия: *</h2>
+                        <input type="text" required maxlength="50" placeholder="Введите фамилию">
+                    </div>
+                </div>
+                <div class="field_line">
+                    <div class="form__field">
+                        <h2 class="tab__title">E-mail: *</h2>
+                        <input type="email" required maxlength="50" placeholder="Введите E-mail">
+                    </div>
+                    <div class="form__field">
+                        <h2 class="tab__title">Адрес: *</h2>
+                        <input type="text" required maxlength="50" placeholder="Введите адрес">
+                    </div>
+                </div>
+                <div class="form__field">
+                    <h2 class="tab__title">Пароль: *</h2>
+                    <input type="password" required autocomplete="new-password" maxlength="300" placeholder="Введите пароль">
+                </div>
+                <div class="form__field">
+                    <h2 class="tab__title">Пароль повторно: *</h2>
+                    <input type="password" required autocomplete="new-password" maxlength="300" placeholder="Введите пароль повторно">
+                </div>
+                <a class="registry__link" href="/login.html">Уже есть аккаунт? Входите</a>
+                <button class="form__submit">Подтвердить</button>
+            </form>
+
+            <!-- Компания -->
+            <form class="registry__tab _company_tab">
+                <div class="field_line">
+                    <div class="form__field">
+                        <h2 class="tab__title">Название компании: *</h2>
+                        <input type="text" required maxlength="50" placeholder="Введите сюда">
+                    </div>
+                    <div class="form__field">
+                        <h2 class="tab__title">E-mail: *</h2>
+                        <input type="text" required maxlength="50" placeholder="Введите сюда">
+                    </div>
+                </div>
+                
+                <div class="form__checkboxes">
+                    <h2 class="checkboxes__title">Склады:</h2>
+                    <div class="checkboxes">
+                        <label class="checkbox">
+                            <div class="checkbox__button">Краснодар</div>
+                            <input type="checkbox">
+                        </label>
+                        <label class="checkbox">
+                            <div class="checkbox__button">Москва</div>
+                            <input type="checkbox">
+                        </label>
+                        <label class="checkbox">
+                            <div class="checkbox__button">Санкт-Петербург</div>
+                            <input type="checkbox">
+                        </label>
+                        <label class="checkbox">
+                            <div class="checkbox__button">Нижний Новгород</div>
+                            <input type="checkbox">
+                        </label>
+                    </div>
+                </div>
+                <div class="form__checkboxes">
+                    <h2 class="checkboxes__title">Пункты выдачи: </h2>
+                    <div class="checkboxes">
+                        <label class="checkbox">
+                            <div class="checkbox__button">Краснодар</div>
+                            <input type="checkbox">
+                        </label>
+                        <label class="checkbox">
+                            <div class="checkbox__button">Москва</div>
+                            <input type="checkbox">
+                        </label>
+                        <label class="checkbox">
+                            <div class="checkbox__button">Санкт-Петербург</div>
+                            <input type="checkbox">
+                        </label>
+                        <label class="checkbox">
+                            <div class="checkbox__button">Нижний Новгород</div>
+                            <input type="checkbox">
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form__field">
+                    <h2 class="tab__title">Изделие производства: *</h2>
+                    <input type="text" required maxlength="200" placeholder="Введите сюда">
+                </div>
+                <div class="form__field">
+                    <h2 class="tab__title">Пароль: *</h2>
+                    <input type="password" required autocomplete="new-password" maxlength="300" placeholder="Введите сюда">
+                </div>
+                <div class="form__field">
+                    <h2 class="tab__title">Пароль повторно: *</h2>
+                    <input type="password" required autocomplete="new-password" maxlength="300" placeholder="Введите сюда">
+                </div>
+                <a class="registry__link" href="/login.html">Уже есть аккаунт? Входите</a>
+                <button class="form__submit">Подтвердить</button>
+            </form>
+
+        </div>
+    </div>
+    
+    <div class="footer footer_white">
+        <div class="footer-main container">
+            <h1 class="footer__title">Kodopes</h1>
+            <div class="footer__nav">
+                <a href="/index.html">Главная</a>
+                <a href="/index.html">О доставке</a>
+                <a href="/privacy-policy.html">Политика конфиденциальности</a>
+                <a href="/contacts.html">Контакты</a>
+                <a href="#">FAQ</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="assets/js/registry.js"></script>
+</body>
+</html>
