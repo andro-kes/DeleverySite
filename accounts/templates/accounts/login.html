@@ -5,32 +5,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <link rel="stylesheet" href="{% static accounts/css/reset.css %}">
-    <link rel="stylesheet" href="{% static accounts/css/fonts.css %}">
-    <link rel="stylesheet" href="{% static accounts/css/header.css %}">
-    <link rel="stylesheet" href="{% static accounts/css/registry.css %}">
-    <link rel="stylesheet" href="{% static accounts/css/main.css %}">
-    <link rel="stylesheet" href="{% satic accounts/css/footer.css %}">
+    <link rel="stylesheet" href="{% static 'accounts/css/reset.css' %}">
+    <link rel="stylesheet" href="{% static 'accounts/css/fonts.css' %}">
+    <link rel="stylesheet" href="{% static 'accounts/css/header.css' %}">
+    <link rel="stylesheet" href="{% static 'accounts/css/registry.css' %}">
+    <link rel="stylesheet" href="{% static 'accounts/css/main.css' %}">
+    <link rel="stylesheet" href="{% static 'accounts/css/footer.css' %}">
 
     <title>Hack2024</title>
 </head>
 <body>
     <div class="header">
         <div class="header-main container">
-            <a href="/index.html" class="header__logo">Kodopes</a>
+            <a href="{% url 'main' %}" class="header__logo">Kodopes</a>
             <div class="header-side">
                 <form class="header__search">
                     <input type="text" required placeholder="Поиск">
                     <button>
-                        <img src="accounts/images/ui/search.svg" alt="Искать">
+                        <img src="{% static 'accounts/img/ui/search.svg' %}" alt="Искать">
                     </button>
                 </form>
                 <div class="header__nav">
-                    <a href="/registry.html" class="nav__account">
-                        <img src="accounts/images/ui/user.svg" alt="Аккаунт">
+                    <a href="{% url 'signup' %}" class="nav__account">
+                        <img src="{% static 'accounts/img/ui/user.svg' %}" alt="Аккаунт">
                     </a>
                     <a href="#" class="nav__vk">
-                        <img src="accounts/images/ui/vk.svg" alt="VK">
+                        <img src="{% static 'accounts/img/ui/vk.svg' %}" alt="VK">
                     </a>
                 </div>
             </div>
@@ -52,16 +52,18 @@
             </h1>
 
             <form class="registry__tab tab_active">
+                {{ form. }}
+                {% csrf_token %}
                 <div class="form__field">
                     <h2 class="tab__title">E-mail:</h2>
-                    <input type="text" maxlength="50" placeholder="Введите сюда" required>
+                    {{ form.username }}
                 </div>
                 <div class="form__field">
                     <h2 class="tab__title">Пароль:</h2>
-                    <input type="password" autocomplete="current-password" maxlength="300" placeholder="Введите сюда" required>
+                    {{ form.password }}
                 </div>
-                <a class="registry__link" href="/registry.html">Нет аккаунта? Зарегистрируйтесь</a>
-                <button class="form__submit">Подтвердить</button>
+                <a class="registry__link" href="{% url 'signup' %}">Нет аккаунта? Зарегистрируйтесь</a>
+                <button class="form__submit" type="submit">Подтвердить</button>
             </form>
 
         </div>
@@ -71,7 +73,7 @@
         <div class="footer-main container">
             <h1 class="footer__title">Kodopes</h1>
             <div class="footer__nav">
-                <a href="/index.html">Главная</a>
+                <a href="{% url 'main' %}">Главная</a>
                 <a href="/index.html">О доставке</a>
                 <a href="/privacy-policy.html">Политика конфиденциальности</a>
                 <a href="/contacts.html">Контакты</a>
@@ -80,6 +82,6 @@
         </div>
     </div>
 
-    <script src="accounts/js/registry.js"></script>
+    <script src="{% static 'accounts/js/registry.js' %}"></script>
 </body>
 </html>

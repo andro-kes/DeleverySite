@@ -1,12 +1,13 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.views import LoginView, LogoutView
 from django.views.generic.base import View
-from .forms import AccountCreationForm
+from .forms import AccountCreationForm, AccoutnLoginForm
 
 class AccountLoginView(LoginView):
     """ 
     Логин
     """
+    form_class = AccoutnLoginForm
     template_name = 'accounts/login.html'
 
 class AccountLogoutView(LogoutView):

@@ -1,15 +1,17 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <link rel="stylesheet" href="assets/css/reset.css">
-    <link rel="stylesheet" href="assets/css/fonts.css">
-    <link rel="stylesheet" href="assets/css/header.css">
-    <link rel="stylesheet" href="assets/css/registry.css">
-    <link rel="stylesheet" href="assets/css/main.css">
-    <link rel="stylesheet" href="assets/css/footer.css">
+    <link rel="stylesheet" href="{% static 'accounts/css/reset.css' %}">
+    <link rel="stylesheet" href="{% static 'accounts/css/fonts.css' %}">
+    <link rel="stylesheet" href="{% static 'accounts/css/header.css' %}">
+    <link rel="stylesheet" href="{% static 'accounts/css/registry.css' %}">
+    <link rel="stylesheet" href="{% static 'accounts/css/main.css' %}">
+    <link rel="stylesheet" href="{% static 'accounts/css/footer.css' %}">
+
 
     <title>Hack2024</title>
 </head>
@@ -85,7 +87,7 @@
                     <h2 class="tab__title">Пароль повторно: *</h2>
                     <input type="password" required autocomplete="new-password" maxlength="300" placeholder="Введите пароль повторно">
                 </div>
-                <a class="registry__link" href="/login.html">Уже есть аккаунт? Входите</a>
+                <a class="registry__link" href="{% url 'login' %}">Уже есть аккаунт? Входите</a>
                 <button class="form__submit">Подтвердить</button>
             </form>
 
@@ -157,7 +159,7 @@
                     <h2 class="tab__title">Пароль повторно: *</h2>
                     <input type="password" required autocomplete="new-password" maxlength="300" placeholder="Введите сюда">
                 </div>
-                <a class="registry__link" href="/login.html">Уже есть аккаунт? Входите</a>
+                <a class="registry__link" href="{% url 'login' %}">Уже есть аккаунт? Входите</a>
                 <button class="form__submit">Подтвердить</button>
             </form>
 
@@ -168,7 +170,7 @@
         <div class="footer-main container">
             <h1 class="footer__title">Kodopes</h1>
             <div class="footer__nav">
-                <a href="/index.html">Главная</a>
+                <a href="{% url 'main' %}">Главная</a>
                 <a href="/index.html">О доставке</a>
                 <a href="/privacy-policy.html">Политика конфиденциальности</a>
                 <a href="/contacts.html">Контакты</a>
@@ -177,6 +179,6 @@
         </div>
     </div>
 
-    <script src="assets/js/registry.js"></script>
+    <script src="{% static 'accounts/js/registry.js' %}"></script>
 </body>
 </html>
