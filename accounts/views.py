@@ -1,14 +1,15 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.views import LoginView, LogoutView
 from django.views.generic.base import View
-from .forms import AccountCreationForm, AccoutnLoginForm
+from .forms import AccountCreationForm, AccountLoginForm
 
 class AccountLoginView(LoginView):
     """ 
     Логин
     """
-    form_class = AccoutnLoginForm
+    authentication_form = AccountLoginForm
     template_name = 'accounts/login.html'
+    redirect_authenticated_user = True
 
 class AccountLogoutView(LogoutView):
     """ 

@@ -51,8 +51,7 @@
                 Вход
             </h1>
 
-            <form class="registry__tab tab_active">
-                {{ form. }}
+            <form class="registry__tab tab_active" method="post" action="{% url 'login' %}">
                 {% csrf_token %}
                 <div class="form__field">
                     <h2 class="tab__title">E-mail:</h2>
