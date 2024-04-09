@@ -28,3 +28,8 @@ class OrderModel(models.Model):
     class Meta:
         verbose_name = 'Заказ'
         verbose_name_plural = 'Заказы'
+        
+        
+class UserCartModel(models.Model):
+    user = models.OneToOneField('accounts.AccountsModel', related_name='user_cart', on_delete=models.CASCADE)
+    products = models.ManyToManyField(OrderModel, related_name='products', blank=True)

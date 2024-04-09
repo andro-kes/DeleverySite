@@ -1,3 +1,11 @@
 <!-- результат поиска, лента товаров, которые были найдены -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>    
+<script src="https://cdn.jsdelivr.net/npm/js-cookie@3/dist/js.cookie.min.js"></script>
 
-{{ object_list }}
+{% load static %}
+{% for product in object_list %}
+    <a href="{% url 'add_to_cart' %}" id="{{ product.id }}" class="add-to-cart-btn">В корзину</a>
+{% endfor %}
+
+{{ user }}
+<script src="{% static 'main/js/add_to_cart.js' %}"></script>
