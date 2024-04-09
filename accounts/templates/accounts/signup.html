@@ -18,20 +18,20 @@
 <body>
     <div class="header">
         <div class="header-main container">
-            <a href="/index.html" class="header__logo">Kodopes</a>
+            <a href="{% url 'main' %}" class="header__logo">Kodopes</a>
             <div class="header-side">
                 <form class="header__search">
                     <input type="text" required placeholder="Поиск">
                     <button>
-                        <img src="assets/images/ui/search.svg" alt="Искать">
+                        <img src="{% static 'accounts/img/ui/search.svg' %}" alt="Искать">
                     </button>
                 </form>
                 <div class="header__nav">
-                    <a href="/registry.html" class="nav__account">
-                        <img src="assets/images/ui/user.svg" alt="Аккаунт">
+                    <a href="{% url 'signup' %}" class="nav__account">
+                        <img src="{% static 'accounts/img/ui/user.svg' %}" alt="Аккаунт">
                     </a>
                     <a href="#" class="nav__vk">
-                        <img src="assets/images/ui/vk.svg" alt="VK">
+                        <img src="{% static 'accounts/img/ui/vk.svg' %}" alt="VK">
                     </a>
                 </div>
             </div>
@@ -58,57 +58,60 @@
             </div>
 
             <!-- Покупатель -->
-            <form class="registry__tab _customer_tab tab_active">
+            <form class="registry__tab _customer_tab tab_active" method="post">
+                {% csrf_token %}
                 <div class="field_line">
                     <div class="form__field">
                         <h2 class="tab__title">Ваше имя: *</h2>
-                        <input type="text" required maxlength="50" placeholder="Введите имя">
+                        {{ form.first_name }}
                     </div>
                     <div class="form__field">
                         <h2 class="tab__title">Ваша фамилия: *</h2>
-                        <input type="text" required maxlength="50" placeholder="Введите фамилию">
+                        {{ form.last_name }}
                     </div>
                 </div>
                 <div class="field_line">
                     <div class="form__field">
                         <h2 class="tab__title">E-mail: *</h2>
-                        <input type="email" required maxlength="50" placeholder="Введите E-mail">
+                        {{ form.username }}
                     </div>
                     <div class="form__field">
                         <h2 class="tab__title">Адрес: *</h2>
-                        <input type="text" required maxlength="50" placeholder="Введите адрес">
+                        {{ form.address }}
                     </div>
                 </div>
                 <div class="form__field">
                     <h2 class="tab__title">Пароль: *</h2>
-                    <input type="password" required autocomplete="new-password" maxlength="300" placeholder="Введите пароль">
+                    {{ form.password1 }}
                 </div>
                 <div class="form__field">
                     <h2 class="tab__title">Пароль повторно: *</h2>
-                    <input type="password" required autocomplete="new-password" maxlength="300" placeholder="Введите пароль повторно">
+                    {{ form.password2 }}
                 </div>
                 <a class="registry__link" href="{% url 'login' %}">Уже есть аккаунт? Входите</a>
-                <button class="form__submit">Подтвердить</button>
+                <button type='submit' class="form__submit">Подтвердить</button>
             </form>
 
             <!-- Компания -->
-            <form class="registry__tab _company_tab">
+            <form class="registry__tab _company_tab" method="post">
+                {% csrf_token %}
                 <div class="field_line">
                     <div class="form__field">
                         <h2 class="tab__title">Название компании: *</h2>
-                        <input type="text" required maxlength="50" placeholder="Введите сюда">
+                        {{ form.organization }}
                     </div>
                     <div class="form__field">
                         <h2 class="tab__title">E-mail: *</h2>
-                        <input type="text" required maxlength="50" placeholder="Введите сюда">
+                        {{ form.username }}
                     </div>
                 </div>
                 
                 <div class="form__checkboxes">
+                    {{ form.list_warehouse }}
                     <h2 class="checkboxes__title">Склады:</h2>
                     <div class="checkboxes">
                         <label class="checkbox">
-                            <div class="checkbox__button">Краснодар</div>
+                            <div class="checkbox__button">Ривертон</div>
                             <input type="checkbox">
                         </label>
                         <label class="checkbox">
@@ -126,6 +129,7 @@
                     </div>
                 </div>
                 <div class="form__checkboxes">
+                    {{ form.list_pick_up_point}}
                     <h2 class="checkboxes__title">Пункты выдачи: </h2>
                     <div class="checkboxes">
                         <label class="checkbox">
@@ -149,18 +153,18 @@
 
                 <div class="form__field">
                     <h2 class="tab__title">Изделие производства: *</h2>
-                    <input type="text" required maxlength="200" placeholder="Введите сюда">
+                    {{ form.production }}
                 </div>
                 <div class="form__field">
                     <h2 class="tab__title">Пароль: *</h2>
-                    <input type="password" required autocomplete="new-password" maxlength="300" placeholder="Введите сюда">
+                    {{ form.password1 }}
                 </div>
                 <div class="form__field">
                     <h2 class="tab__title">Пароль повторно: *</h2>
-                    <input type="password" required autocomplete="new-password" maxlength="300" placeholder="Введите сюда">
+                    {{ form.password2 }}
                 </div>
                 <a class="registry__link" href="{% url 'login' %}">Уже есть аккаунт? Входите</a>
-                <button class="form__submit">Подтвердить</button>
+                <button type='submit' class="form__submit">Подтвердить</button>
             </form>
 
         </div>

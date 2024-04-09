@@ -34,7 +34,7 @@ class SignUpView(View):
         form = AccountCreationForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('main')
+            return redirect('login')
         data = {
             'form': form,
         }

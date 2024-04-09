@@ -18,3 +18,7 @@ checkboxes.forEach(i => {
         i.classList.toggle("_checked");
     };
 });
+
+
+
+

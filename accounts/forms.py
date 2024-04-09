@@ -34,30 +34,48 @@ class AccountCreationForm(UserCreationForm):
                     'placeholder': '',
                 }
             ),
-             'list_warehouse': forms.CheckboxSelectMultiple(
+            'list_warehouse': forms.CheckboxSelectMultiple(
                 attrs = {
-                    'class': '',
+                    #'class': 'checkboxes',
                     'placeholder': '',
                 }
             ),
-              'list_pick_up_point': forms.CheckboxSelectMultiple(
+            'list_pick_up_point': forms.CheckboxSelectMultiple(
                 attrs = {
-                    'class': '',
+                    #'class': 'checkboxes',
                     'placeholder': '',
                 }
             ),
-              'organization': forms.TextInput(
+            'organization': forms.TextInput(
                 attrs = {
                     'class': '',
-                    'placeholder': ''
+                    'placeholder': 'Введите сюда'
                 }
             ),
             'production': forms.TextInput(
                 attrs = {
                     'class': '',
-                    'placeholder': ''
+                    'placeholder': 'Введите сюда'
                 }
-            )
+            ), 
+            'first_name': forms.TextInput(
+                attrs = {
+                    'class': '',
+                    'placeholder': 'Ваше имя'
+                }
+            ),
+            'last_name': forms.TextInput(
+                attrs = {
+                    'class': '',
+                    'placeholder': 'Ваша фамилия'
+                }
+            ),
+            'username': forms.TextInput(
+                attrs = {
+                    'class': '',
+                    'placeholder': 'E-mail'
+                }
+            ),
         }
         
 class AccountLoginForm(AuthenticationForm):
