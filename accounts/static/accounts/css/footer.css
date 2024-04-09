@@ -1,0 +1,35 @@
+.footer {
+    padding: 107px 0;
+    background: url(../images/Pattern.svg);
+    background-color: var(--accent50);
+}
+.footer__title {
+    font-size: 3.2rem;
+    color: #fff;
+    margin-bottom: 3rem;
+}
+.footer__nav {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.footer__nav a {
+    color: #fff;
+    opacity: 70%;
+    font-size: 1.4rem;
+}
+.footer_white {
+    background: #fff;
+}
+.footer_white .footer__title {
+    color: var(--accent-color)
+}
+.footer_white .footer__nav a {
+    color: var(--accent-color)
+}
+
+@media (max-width: 600px) {
+    .footer {
+        padding: 50px 0;
+    }
+}

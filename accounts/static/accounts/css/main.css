@@ -1,0 +1,35 @@
+body {
+    font-family: "Montserrat";
+}
+html {
+    font-size: 10px;
+}
+
+:root {
+    --dark-color: #1D1D1D;
+    --accent-color: #1654B3;
+    --accent2-color: #1A60CA;
+    --accent50: rgba(22, 84, 178, 0.5);
+    --accent20: rgba(22, 84, 178, 0.2);
+    --accent70: #4E7EC5;
+}
+
+.container {
+    max-width: 1319px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+@media (max-width: 1400px) {
+    .container {
+        max-width: 100%;
+        padding-left: 3rem;
+        padding-right: 3rem;
+    }
+}
+@media (max-width: 420px) {
+    .container {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+    }
+}
