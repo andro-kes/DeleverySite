@@ -1,1 +1,84 @@
-<!-- страница для логина -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="stylesheet" href="assets/css/reset.css">
+    <link rel="stylesheet" href="assets/css/fonts.css">
+    <link rel="stylesheet" href="assets/css/header.css">
+    <link rel="stylesheet" href="assets/css/registry.css">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/footer.css">
+
+    <title>Hack2024</title>
+</head>
+<body>
+    <div class="header">
+        <div class="header-main container">
+            <a href="/index.html" class="header__logo">Kodopes</a>
+            <div class="header-side">
+                <form class="header__search">
+                    <input type="text" required placeholder="Поиск">
+                    <button>
+                        <img src="assets/images/ui/search.svg" alt="Искать">
+                    </button>
+                </form>
+                <div class="header__nav">
+                    <a href="/registry.html" class="nav__account">
+                        <img src="assets/images/ui/user.svg" alt="Аккаунт">
+                    </a>
+                    <a href="#" class="nav__vk">
+                        <img src="assets/images/ui/vk.svg" alt="VK">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="cataloque">
+        <div class="cataloque-main container">
+            <div class="cataloque__nav">
+                <a href="#">Товары</a>
+                <a href="#">Заказы</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="registry">
+        <div class="registry-main container">
+            <h1 class="registry__title">
+                Вход
+            </h1>
+
+            <form class="registry__tab tab_active">
+                <div class="form__field">
+                    <h2 class="tab__title">E-mail:</h2>
+                    <input type="text" maxlength="50" placeholder="Введите сюда" required>
+                </div>
+                <div class="form__field">
+                    <h2 class="tab__title">Пароль:</h2>
+                    <input type="password" autocomplete="current-password" maxlength="300" placeholder="Введите сюда" required>
+                </div>
+                <a class="registry__link" href="/registry.html">Нет аккаунта? Зарегистрируйтесь</a>
+                <button class="form__submit">Подтвердить</button>
+            </form>
+
+        </div>
+    </div>
+    
+    <div class="footer footer_white">
+        <div class="footer-main container">
+            <h1 class="footer__title">Kodopes</h1>
+            <div class="footer__nav">
+                <a href="/index.html">Главная</a>
+                <a href="/index.html">О доставке</a>
+                <a href="/privacy-policy.html">Политика конфиденциальности</a>
+                <a href="/contacts.html">Контакты</a>
+                <a href="#">FAQ</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="assets/js/registry.js"></script>
+</body>
+</html>
