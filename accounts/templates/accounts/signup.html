@@ -70,16 +70,24 @@
                         {{ form.last_name }}
                     </div>
                 </div>
-                <div class="field_line">
-                    <div class="form__field">
-                        <h2 class="tab__title">E-mail: *</h2>
-                        {{ form.username }}
-                    </div>
-                    <div class="form__field">
-                        <h2 class="tab__title">Адрес: *</h2>
-                        {{ form.address }}
+                
+                <div class="form__field">
+                    <h2 class="tab__title">E-mail: *</h2>
+                    {{ form.username }}
+                </div>
+                <div class="form__field">
+                    <h2 class="tab__title">Адрес: *</h2>
+                    {{ form.address }}
+                    <div class="checkboxes">
+                        {% for city in cities %}
+                        <label class="checkbox">
+                            <div class="checkbox__button" data-category="address" id="{{ city.id }}">{{ city.name }}</div>
+                            <input type="checkbox">
+                        </label>
+                        {% endfor %}
                     </div>
                 </div>
+                
                 <div class="form__field">
                     <h2 class="tab__title">Пароль: *</h2>
                     {{ form.password1 }}
@@ -89,7 +97,8 @@
                     {{ form.password2 }}
                 </div>
                 <a class="registry__link" href="{% url 'login' %}">Уже есть аккаунт? Входите</a>
-                <button type='submit' class="form__submit">Подтвердить</button>
+                {{ form.status }}
+                <button type='' class="form__submit" id="button_sub">Подтвердить</button>
             </form>
 
             <!-- Компания -->
@@ -109,45 +118,25 @@
                 <div class="form__checkboxes">
                     {{ form.list_warehouse }}
                     <h2 class="checkboxes__title">Склады:</h2>
-                    <div class="checkboxes">
-                        <label class="checkbox">
-                            <div class="checkbox__button">Ривертон</div>
-                            <input type="checkbox">
-                        </label>
-                        <label class="checkbox">
-                            <div class="checkbox__button">Москва</div>
-                            <input type="checkbox">
-                        </label>
-                        <label class="checkbox">
-                            <div class="checkbox__button">Санкт-Петербург</div>
-                            <input type="checkbox">
-                        </label>
-                        <label class="checkbox">
-                            <div class="checkbox__button">Нижний Новгород</div>
-                            <input type="checkbox">
-                        </label>
-                    </div>
+                        <div class="checkboxes">
+                            {% for city in cities %}
+                            <label class="checkbox">
+                                <div class="checkbox__button" data-category="warehouse" id="{{ city.id }}">{{ city.name }}</div>
+                                <input type="checkbox">
+                            </label>
+                            {% endfor %}
+                        </div>
                 </div>
                 <div class="form__checkboxes">
                     {{ form.list_pick_up_point}}
                     <h2 class="checkboxes__title">Пункты выдачи: </h2>
                     <div class="checkboxes">
-                        <label class="checkbox">
-                            <div class="checkbox__button">Краснодар</div>
-                            <input type="checkbox">
-                        </label>
-                        <label class="checkbox">
-                            <div class="checkbox__button">Москва</div>
-                            <input type="checkbox">
-                        </label>
-                        <label class="checkbox">
-                            <div class="checkbox__button">Санкт-Петербург</div>
-                            <input type="checkbox">
-                        </label>
-                        <label class="checkbox">
-                            <div class="checkbox__button">Нижний Новгород</div>
-                            <input type="checkbox">
-                        </label>
+                        {% for city in cities %}
+                            <label class="checkbox">
+                                <div class="checkbox__button" data-category="pick_up_point" id="{{ city.id }}">{{ city.name }}</div>
+                                <input type="checkbox">
+                            </label>
+                        {% endfor %}
                     </div>
                 </div>
 
@@ -164,6 +153,7 @@
                     {{ form.password2 }}
                 </div>
                 <a class="registry__link" href="{% url 'login' %}">Уже есть аккаунт? Входите</a>
+                {{ form.status }}
                 <button type='submit' class="form__submit">Подтвердить</button>
             </form>
 

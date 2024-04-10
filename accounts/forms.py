@@ -26,26 +26,15 @@ class AccountCreationForm(UserCreationForm):
             'username', 'address', 'list_warehouse', 
             'list_pick_up_point', 'organization', 
             'production', 'first_name', 'last_name',
+            'status',
         )
         widgets = {
-            'address': forms.CheckboxSelectMultiple(
-                attrs = {
-                    'class': '',
-                    'placeholder': '',
-                }
-            ),
-            'list_warehouse': forms.CheckboxSelectMultiple(
-                attrs = {
-                    #'class': 'checkboxes',
-                    'placeholder': '',
-                }
-            ),
-            'list_pick_up_point': forms.CheckboxSelectMultiple(
-                attrs = {
-                    #'class': 'checkboxes',
-                    'placeholder': '',
-                }
-            ),
+            'address': forms.CheckboxSelectMultiple(),
+            
+            'list_warehouse': forms.CheckboxSelectMultiple(),
+            
+            'list_pick_up_point': forms.CheckboxSelectMultiple(),
+            
             'organization': forms.TextInput(
                 attrs = {
                     'class': '',
@@ -74,6 +63,12 @@ class AccountCreationForm(UserCreationForm):
                 attrs = {
                     'class': '',
                     'placeholder': 'E-mail'
+                }
+            ),
+            'status': forms.TextInput(
+                attrs = {
+                    'hidden': True,
+                    'id': 'status_form',
                 }
             ),
         }

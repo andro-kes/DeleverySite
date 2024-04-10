@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.views import LoginView, LogoutView
 from django.views.generic.base import View
 from .forms import AccountCreationForm, AccountLoginForm
+from .models import Cities
 
 class AccountLoginView(LoginView):
     """ 
@@ -26,7 +27,8 @@ class SignUpView(View):
     def get(self, request):
         form = AccountCreationForm()
         data = {
-            'form': form
+            'form': form,
+            'cities': Cities.objects.all()
         }
         return render(request, self.template_name, data)
     
