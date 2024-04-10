@@ -47,9 +47,9 @@ table {
 	box-sizing: border-box;
 }
 
-#id_address{
+/* #id_address{
 	display: none;
-}
+} */
 #id_list_warehouse{
 	display: none;
 }

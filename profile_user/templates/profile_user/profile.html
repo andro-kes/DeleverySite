@@ -53,29 +53,42 @@
 
     <div class="profile_page profile_user _active">
         <div class="profile">
-            <form class="profile-main container">
+            <form class="profile-main container" method='post'>
+                {% csrf_token %}
                 <label for="avatar_load" class="profile__avatar" data-imgurl="{% static '/accounts/img/avatar.jpg' %}">
-                    
+                
                 </label>
                 <input type="file" id="avatar_load">
                 <p class="profile__hint">*Нажмите на картинку, чтобы сменить её</p>
 
-                <h1 class="profile__name">Кызылбек Ар-зыл-Жан</h1>
+                <h1 class="profile__name">{{ user.first_name }} {{user.last_name}}</h1>
                 <div class="field_line">
                     <div class="form__field">
                         <h2 class="tab__title">Ваше имя: *</h2>
-                        <input type="text" required maxlength="50" placeholder="Введите сюда" value="Кызылбек">
+                        {{ form.first_name }}
                     </div>
                     <div class="form__field">
                         <h2 class="tab__title">Ваша фамилия: *</h2>
-                        <input type="text" required maxlength="50" placeholder="Введите сюда" value="Ар-зыл-Жан">
+                        {{ form.last_name }}
                     </div>
                 </div>
                 <div class="form__field">
-                    <h2 class="tab__title">Ваш адрес: *</h2>
-                    <input type="text" required maxlength="50" placeholder="Введите сюда" value="Казахстан, Алма-Ата, ул. Кызмындырсалым, 33/7">
+                    <h2 class="tab__title">E-mail: *</h2>
+                    {{ form.username }}
                 </div>
-                <button class="profile__edit_btn">Подтвердить изменения</button>
+                <div class="form__field">
+                    <h2 class="tab__title">Ваш адрес: *</h2>
+                    {{ form.address }}
+                    <div class="checkboxes">
+                        {% for city in cities %}
+                        <label class="checkbox">
+                            <div class="checkbox__button" data-category="address" id="{{ city.id }}">{{ city.name }}</div>
+                            <input type="checkbox">
+                        </label>
+                        {% endfor %}
+                    </div>
+                </div>
+                <button type='submit' class="profile__edit_btn">Подтвердить изменения</button>
             </form>
         </div>
 
