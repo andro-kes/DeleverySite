@@ -1,6 +1,6 @@
 .footer {
     padding: 107px 0;
-    background: url(../images/Pattern.svg);
+    background: url('/static/accounts/img/Pattern.svg');
     background-color: var(--accent50);
 }
 .footer__title {

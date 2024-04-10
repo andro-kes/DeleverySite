@@ -1,8 +1,12 @@
 let tabsBtn = document.querySelectorAll(".registry__switch .switch__btn");
 
 const formsStatus = document.querySelectorAll('#status_form');
-formsStatus[0].value = 'Покупатель';
-formsStatus[1].value = 'Компания';
+if (formsStatus.length){
+    console.log(formsStatus)
+    formsStatus[0].value = 'Покупатель';
+    formsStatus[1].value = 'Компания';
+}
+
 
 tabsBtn.forEach(i => {
     i.onclick = () => {

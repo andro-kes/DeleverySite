@@ -1,8 +1,9 @@
 from django.shortcuts import render
 from django.views.generic.base import View
+from django.views.generic.detail import DetailView
+from accounts.models import AccountsModel
 
-class ProfileView(View):
+class ProfileView(DetailView):
+    model = AccountsModel
     template_name = 'profile_user/profile.html'
-    
-    def get(self, request):
-        return render(request, self.template_name)
+    context_object_name = 'user'

@@ -52,7 +52,7 @@ body {
     margin-bottom: 1rem;
     color: var(--accent-color);
 }
-.registry__tab input {
+.form__field input {
     font-family: "Montserrat", sans-serif;
     font-size: 1.4rem;
     font-weight: 500;
