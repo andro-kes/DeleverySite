@@ -1,0 +1,142 @@
+.profile_page._active {
+    display: block;
+}
+.profile_page {
+    display: none;
+}
+.profile-main {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 80px;
+}
+.profile__avatar {
+    max-width: 224px;
+    width: 100%;
+    height: 224px;
+    background-position: center;
+    background-size: cover;
+    border-radius: 10px;
+    border: 5px solid #fff;
+    margin-top: -112px;
+}
+.profile__name {
+    font-size: 3.2rem;
+    font-weight: 500;
+    color: var(--accent-color);
+    margin-top: 4rem;
+    margin-bottom: 2rem;
+}
+.profile__sub_info {
+    margin-top: 1rem;
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: var(--accent-color);
+}
+.profile__edit_btn {
+    height: 40px;
+    font-family: "Montserrat", sans-serif;
+    font-size: 1.4rem;
+    font-weight: 500;
+    margin-top: 4rem;
+    max-width: 224px;
+    cursor: pointer;
+    background-color: var(--accent-color);
+    border: none;
+    border: 2px solid var(--accent-color);
+    color: #fff;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+.profile__edit_btn:hover {
+    background-color: #fff;
+    color: var(--accent-color);
+}
+.orders {
+    background-color: var(--accent20);
+}
+.orders-main {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+.order {
+    display: flex;
+    border-radius: 10px;
+    background-color: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+}
+.order__image {
+    height: 224px;
+    max-width: 224px;
+    width: 100%;
+    background-color: #fff;
+    background-size: 50%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.order__info {
+    padding: 5rem 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.info__title {
+    font-size: 2.2rem;
+    font-weight: 500;
+}
+.info__name {
+    font-size: 1.4rem;
+    margin-top: 12px;
+}
+.order__status {
+    height: 40px;
+    padding: 0 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.4rem;
+    font-weight: 500;
+    background-color: var(--accent-color);
+    color: #fff;
+    max-width: 220px;
+    border-radius: 10px;
+}
+.form__checkboxes {
+    margin-top: 2rem;
+}
+.form__field {
+    margin-top: 2rem;
+}
+input[type="file"] {
+    position: absolute;
+    visibility: hidden;
+    opacity: 0;
+}
+
+@media (max-width: 768px) {
+    .order__info {
+        padding-top: 3rem;
+        padding-bottom: 3rem;
+    }
+    .info__name {
+        line-height: 125%;
+    }
+}
+
+@media (max-width: 600px) {
+    .order {
+        flex-direction: column;
+    }
+    .order__image {
+        max-width: 100%;
+    }
+    .order__info {
+        gap: 3rem;
+    }
+    .order__status {
+        max-width: 100%;
+    }
+}
