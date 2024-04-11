@@ -1,10 +1,10 @@
-<!-- главная страница -->
-{{ user.id }}
-<form action="" method="post">
+{% load static %}
+<!-- {{ user.id }}
+<form action="add_to_cart" method="post">
     {% csrf_token %}
     {{ form.as_p }}
     <input type="submit">
-</form>
+</form> -->
 
 <!DOCTYPE html>
 <html lang="en">
@@ -12,12 +12,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <link rel="stylesheet" href="assets/css/reset.css">
-    <link rel="stylesheet" href="assets/css/fonts.css">
-    <link rel="stylesheet" href="assets/css/header.css">
-    <link rel="stylesheet" href="assets/css/index.css">
-    <link rel="stylesheet" href="assets/css/main.css">
-    <link rel="stylesheet" href="assets/css/footer.css">
+    <link rel="stylesheet" href="{% static '/accounts/css/reset.css' %}">
+    <link rel="stylesheet" href="{% static '/accounts/css/fonts.css' %}">
+    <link rel="stylesheet" href="{% static '/accounts/css/header.css' %}">
+    <link rel="stylesheet" href="{% static '/accounts/css/index.css' %}">
+    <link rel="stylesheet" href="{% static '/accounts/css/main.css' %}">
+    <link rel="stylesheet" href="{% static '/accounts/css/footer.css' %}">    
 
     <title>Hack2024</title>
 </head>
@@ -26,18 +26,19 @@
         <div class="header-main container">
             <a href="/index.html" class="header__logo">Kodopes</a>
             <div class="header-side">
-                <form class="header__search">
-                    <input type="text" required placeholder="Поиск">
-                    <button>
-                        <img src="assets/images/ui/search.svg" alt="Искать">
+                <form class="header__search" method="post">
+                    {% csrf_token %}
+                    {{ form.search_field }}
+                    <button type="submit">
+                        <img src="{% static 'accounts/img/ui/search.svg' %}" alt="Искать">
                     </button>
                 </form>
                 <div class="header__nav">
                     <a href="/registry.html" class="nav__account">
-                        <img src="assets/images/ui/user.svg" alt="Аккаунт">
+                        <img src="{% static 'accounts/img/ui/user.svg' %}" alt="Аккаунт">
                     </a>
                     <a href="#" class="nav__vk">
-                        <img src="assets/images/ui/vk.svg" alt="VK">
+                        <img src="{% static 'accounts/img/ui/vk.svg' %}" alt="VK">
                     </a>
                 </div>
             </div>

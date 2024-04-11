@@ -46,6 +46,9 @@ class ResultsView(ListView):
         return OrderModel.objects.filter(id__in=queryset_ids)
     
 def add_to_cart(request):
+    """
+    Добавление в корзину
+    """
     product_id = request.POST.get('product_id')
     if product_id:
         product = OrderModel.objects.get(id=product_id)

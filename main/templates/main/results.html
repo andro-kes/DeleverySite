@@ -3,25 +3,18 @@
 <script src="https://cdn.jsdelivr.net/npm/js-cookie@3/dist/js.cookie.min.js"></script>
 
 {% load static %}
-{% for product in object_list %}
-    <a href="{% url 'add_to_cart' %}" id="{{ product.id }}" class="add-to-cart-btn">В корзину</a>
-{% endfor %}
-
-{{ user }}
-<script src="{% static 'main/js/add_to_cart.js' %}"></script>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <link rel="stylesheet" href="assets/css/reset.css">
-    <link rel="stylesheet" href="assets/css/fonts.css">
-    <link rel="stylesheet" href="assets/css/header.css">
-    <link rel="stylesheet" href="assets/css/main.css">
-    <link rel="stylesheet" href="assets/css/list.css">
-    <link rel="stylesheet" href="assets/css/footer.css">
+    <link rel="stylesheet" href="{% static 'main/css/list.css' %}">
+    <link rel="stylesheet" href="{% static '/accounts/css/reset.css' %}">
+    <link rel="stylesheet" href="{% static '/accounts/css/fonts.css' %}">
+    <link rel="stylesheet" href="{% static '/accounts/css/header.css' %}">
+    <link rel="stylesheet" href="{% static '/accounts/css/main.css' %}">
+    <link rel="stylesheet" href="{% static '/accounts/css/footer.css' %}">  
 
     <title>Hack2024</title>
 </head>
@@ -33,15 +26,15 @@
                 <form class="header__search">
                     <input type="text" required placeholder="Поиск">
                     <button>
-                        <img src="assets/images/ui/search.svg" alt="Искать">
+                        <img src="{% static '/accounts/img/ui/search.svg' %}" alt="Искать">
                     </button>
                 </form>
                 <div class="header__nav">
                     <a href="/registry.html" class="nav__account">
-                        <img src="assets/images/ui/user.svg" alt="Аккаунт">
+                        <img src="{% static '/accounts/img/ui/user.svg' %}" alt="Аккаунт">
                     </a>
                     <a href="#" class="nav__vk">
-                        <img src="assets/images/ui/vk.svg" alt="VK">
+                        <img src="{% static '/accounts/img/ui/vk.svg' %}" alt="VK">
                     </a>
                 </div>
             </div>
@@ -71,67 +64,25 @@
                 <button class="filters__accept">Применить</button>
             </div>
             <div class="products__list">
+                {% for product in object_list %}
                 <div class="list__product">
+                    
                     <div class="product__image">
-                        <img  src="assets/images/Product.png">
+                        <img  src="{{ product.picture1.url }}">
                     </div>
                     <div class="product__info">
                         <div class="product__text">
-                            <h2 class="product__title">Будильник Ядерный NucleoSleep</h2>
-                            <div class="product__description">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Adipisci molestiae ex sint illum.</div>
-                            <div class="product__price">739&#8381</div>
+                            <h2 class="product__title">{{ product.name}}</h2>
+                            <div class="product__description">{{ product.description }}</div>
+                            <div class="product__price">{{ product.price }}</div>
                         </div>
                         <div class="product__buy">
                             <button class="product__watch product__button">Просмотреть</button>
-                            <button class="product__fast_to_cart product__button">В корзину</button>
+                            <a href="{% url 'add_to_cart' %}" id="{{ product.id }}" class="product__watch product__button">В корзину</a>
                         </div>
                     </div>
                 </div>
-                <div class="list__product">
-                    <div class="product__image">
-                        <img  src="assets/images/Product.png">
-                    </div>
-                    <div class="product__info">
-                        <div class="product__text">
-                            <h2 class="product__title">Будильник Ядерный NucleoSleep</h2>
-                            <div class="product__description">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Adipisci molestiae ex sint illum.</div>
-                        </div>
-                        <div class="product__buy">
-                            <button class="product__watch product__button">Просмотреть</button>
-                            <button class="product__fast_to_cart product__button">В корзину</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="list__product">
-                    <div class="product__image">
-                        <img  src="assets/images/Product.png">
-                    </div>
-                    <div class="product__info">
-                        <div class="product__text">
-                            <h2 class="product__title">Будильник Ядерный NucleoSleep</h2>
-                            <div class="product__description">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Adipisci molestiae ex sint illum.</div>
-                        </div>
-                        <div class="product__buy">
-                            <button class="product__watch product__button">Просмотреть</button>
-                            <button class="product__fast_to_cart product__button">В корзину</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="list__product">
-                    <div class="product__image">
-                        <img  src="assets/images/Product.png">
-                    </div>
-                    <div class="product__info">
-                        <div class="product__text">
-                            <h2 class="product__title">Будильник Ядерный NucleoSleep</h2>
-                            <div class="product__description">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Adipisci molestiae ex sint illum.</div>
-                        </div>
-                        <div class="product__buy">
-                            <button class="product__watch product__button">Просмотреть</button>
-                            <button class="product__fast_to_cart product__button">В корзину</button>
-                        </div>
-                    </div>
-                </div>
+                {% endfor %}
             </div>
             <div class="products__pagination">
                 <button class="pagination__btn btn_prev">Назад</button>
@@ -158,5 +109,6 @@
             </div>
         </div>
     </div>
+    <script src="{% static 'main/js/add_to_cart.js' %}"></script>
 </body>
 </html>
