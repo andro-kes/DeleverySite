@@ -9,3 +9,154 @@
 
 {{ user }}
 <script src="{% static 'main/js/add_to_cart.js' %}"></script>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="stylesheet" href="assets/css/reset.css">
+    <link rel="stylesheet" href="assets/css/fonts.css">
+    <link rel="stylesheet" href="assets/css/header.css">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/list.css">
+    <link rel="stylesheet" href="assets/css/footer.css">
+
+    <title>Hack2024</title>
+</head>
+<body>
+    <div class="header">
+        <div class="header-main container">
+            <a href="/index.html" class="header__logo">Kodopes</a>
+            <div class="header-side">
+                <form class="header__search">
+                    <input type="text" required placeholder="Поиск">
+                    <button>
+                        <img src="assets/images/ui/search.svg" alt="Искать">
+                    </button>
+                </form>
+                <div class="header__nav">
+                    <a href="/registry.html" class="nav__account">
+                        <img src="assets/images/ui/user.svg" alt="Аккаунт">
+                    </a>
+                    <a href="#" class="nav__vk">
+                        <img src="assets/images/ui/vk.svg" alt="VK">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="cataloque">
+        <div class="cataloque-main container">
+            <div class="cataloque__nav">
+                <a href="#">Товары</a>
+                <a href="#">Заказы</a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="products">
+        <div class="products-main container">
+            <h1 class="products__title">Результаты поиска по запросу: <b class="title__value">Будильники Ядерные</b></h1>
+            <div class="products__filters">
+                <div class="filters__filter">
+                    <div class="filter__name">Цена От:</div>
+                    <input type="number" placeholder="0">
+                </div>
+                <div class="filters__filter">
+                    <div class="filter__name">Цена До:</div>
+                    <input type="number" placeholder="100000">
+                </div>
+                <button class="filters__accept">Применить</button>
+            </div>
+            <div class="products__list">
+                <div class="list__product">
+                    <div class="product__image">
+                        <img  src="assets/images/Product.png">
+                    </div>
+                    <div class="product__info">
+                        <div class="product__text">
+                            <h2 class="product__title">Будильник Ядерный NucleoSleep</h2>
+                            <div class="product__description">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Adipisci molestiae ex sint illum.</div>
+                            <div class="product__price">739&#8381</div>
+                        </div>
+                        <div class="product__buy">
+                            <button class="product__watch product__button">Просмотреть</button>
+                            <button class="product__fast_to_cart product__button">В корзину</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="list__product">
+                    <div class="product__image">
+                        <img  src="assets/images/Product.png">
+                    </div>
+                    <div class="product__info">
+                        <div class="product__text">
+                            <h2 class="product__title">Будильник Ядерный NucleoSleep</h2>
+                            <div class="product__description">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Adipisci molestiae ex sint illum.</div>
+                        </div>
+                        <div class="product__buy">
+                            <button class="product__watch product__button">Просмотреть</button>
+                            <button class="product__fast_to_cart product__button">В корзину</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="list__product">
+                    <div class="product__image">
+                        <img  src="assets/images/Product.png">
+                    </div>
+                    <div class="product__info">
+                        <div class="product__text">
+                            <h2 class="product__title">Будильник Ядерный NucleoSleep</h2>
+                            <div class="product__description">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Adipisci molestiae ex sint illum.</div>
+                        </div>
+                        <div class="product__buy">
+                            <button class="product__watch product__button">Просмотреть</button>
+                            <button class="product__fast_to_cart product__button">В корзину</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="list__product">
+                    <div class="product__image">
+                        <img  src="assets/images/Product.png">
+                    </div>
+                    <div class="product__info">
+                        <div class="product__text">
+                            <h2 class="product__title">Будильник Ядерный NucleoSleep</h2>
+                            <div class="product__description">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Adipisci molestiae ex sint illum.</div>
+                        </div>
+                        <div class="product__buy">
+                            <button class="product__watch product__button">Просмотреть</button>
+                            <button class="product__fast_to_cart product__button">В корзину</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="products__pagination">
+                <button class="pagination__btn btn_prev">Назад</button>
+                <div class="pagination__page btn_curr">1</div>
+                <div class="pagination__page">2</div>
+                <div class="pagination__page">3</div>
+                <div class="pagination__page">4</div>
+                <div class="pagination__page">5</div>
+                <div class="pagination__page">6</div>
+                <button class="pagination__btn btn_next">Вперёд</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="footer-main container">
+            <h1 class="footer__title">Kodopes</h1>
+            <div class="footer__nav">
+                <a href="/index.html">Главная</a>
+                <a href="/index.html">О доставке</a>
+                <a href="/privacy-policy.html">Политика конфиденциальности</a>
+                <a href="/contacts.html">Контакты</a>
+                <a href="#">FAQ</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
