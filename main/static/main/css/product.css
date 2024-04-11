@@ -72,7 +72,7 @@
 .info__buy {
     display: flex;
     gap: 1rem;
-    margin-top: 2rem;
+    margin-top: 4rem;
 }
 .info__text {
     line-height: 125%;
@@ -114,6 +114,45 @@
 .info__date b {
     font-weight: 700;
     color: var(--accent-color);
+}
+.delivery {
+    margin-top: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+.delivery__option {
+    padding: 1rem 1.5rem;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--accent-color);
+    background-color: #fff;
+    border-radius: 10px;
+    border: 2px solid var(--accent-color);
+    outline: none;
+    cursor: pointer;
+    max-height: 40px;
+    max-width: 120px;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+.delivery__option._picked {
+    background-color: var(--accent-color);
+    color: #fff;
+}
+.delivery input {
+    visibility: hidden;
+    position: absolute;
+    opacity: 0;
+}
+.text__prop {
+    margin-top: 1rem;
+    display: flex;
+    gap: 1rem;
+}
+.prop_val {
+    color: var(--accent-color);
+    font-weight: 500;
 }
 
 @media (max-width: 1400px) {
