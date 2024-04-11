@@ -1,5 +1,5 @@
 .product {
-    background-image: url(../images/Pattern.svg);
+    background-image: url('/static/accounts/img/Pattern.svg');
     background-color: var(--accent50);
     padding-top: 3rem;
     padding-bottom: 3rem;

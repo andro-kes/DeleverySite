@@ -5,7 +5,9 @@ class OrderModel(models.Model):
     Модель для готовых товаров
     """
     name = models.CharField(max_length=100)
-    picture = models.ImageField(upload_to='media/')
+    picture1 = models.ImageField(upload_to='media/', null=True, blank=True)
+    picture2 = models.ImageField(upload_to='media/', null=True, blank=True)
+    picture3 = models.ImageField(upload_to='media/', null=True, blank=True)
     price = models.IntegerField()
     size = models.CharField(max_length=20)
     mass = models.FloatField()
@@ -19,10 +21,8 @@ class OrderModel(models.Model):
     # отвечает за находимость товара. Работает примерно как хештеги в запретграме)
     category = models.CharField(max_length=250)
     
-    date = models.DateTimeField(auto_now_add=True)
-    
     # склад, на котором находится этот товар
-    warehouse = models.ForeignKey('accounts.Cities', on_delete=models.CASCADE, null=True)
+    warehouse = models.ManyToManyField('accounts.Cities', related_name='warehouse_order')
     
     def __str__(self):
         return self.name

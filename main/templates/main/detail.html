@@ -1,15 +1,16 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <link rel="stylesheet" href="assets/css/reset.css">
-    <link rel="stylesheet" href="assets/css/fonts.css">
-    <link rel="stylesheet" href="assets/css/header.css">
-    <link rel="stylesheet" href="assets/css/product.css">
-    <link rel="stylesheet" href="assets/css/main.css">
-    <link rel="stylesheet" href="assets/css/footer.css">
+    <link rel="stylesheet" href="{% static '/accounts/css/reset.css' %}">
+    <link rel="stylesheet" href="{% static '/accounts/css/fonts.css' %}">
+    <link rel="stylesheet" href="{% static '/accounts/css/header.css' %}">
+    <link rel="stylesheet" href="{% static '/accounts/css/main.css' %}">
+    <link rel="stylesheet" href="{% static '/accounts/css/footer.css' %}">
+    <link rel="stylesheet" href="{% static 'main/css/product.css' %}">
 
     <title>Hack2024</title>
 </head>
@@ -21,15 +22,15 @@
                 <form class="header__search">
                     <input type="text" required placeholder="Поиск">
                     <button>
-                        <img src="assets/images/ui/search.svg" alt="Искать">
+                        <img src="{% static '/accounts/img/ui/search.svg' %}" alt="Искать">
                     </button>
                 </form>
                 <div class="header__nav">
                     <a href="/registry.html" class="nav__account">
-                        <img src="assets/images/ui/user.svg" alt="Аккаунт">
+                        <img src="{% static '/accounts/img/ui/user.svg' %}" alt="Аккаунт">
                     </a>
                     <a href="#" class="nav__vk">
-                        <img src="assets/images/ui/vk.svg" alt="VK">
+                        <img src="{% static '/accounts/img/ui/vk.svg' %}" alt="VK">
                     </a>
                 </div>
             </div>
@@ -47,26 +48,26 @@
     <div class="product">
         <div class="product-main container">
             <div class="product__title">
-                <h1>Манга Магическая Битва. Книга 10.</h1>
+                <h1>{{ product.name }}</h1>
                 <div class="title__rating">
-                    <img src="assets/images/ui/star.svg"> 4.9
+                    <img src="{% static '/accounts/img/ui/star.svg' %}"> 4.9
                 </div>
             </div>
             <div class="product__row">
                 <div class="product__slider">
                     <div class="slider__main">
-                        <img src="assets/images/Product.png">
+                        <img src="{{ product.picture1.url }}">
                     </div>
                     <div class="slider__sub">
-                        <img src="assets/images/Product.png" class="slider_btn _slider_current">
-                        <img src="https://ir.ozone.ru/s3/multimedia-w/wc1000/6865509596.jpg" class="slider_btn">
-                        <img src="assets/images/Product.png" class="slider_btn">
+                        <img src="{{ product.picture1.url }}" class="slider_btn _slider_current">
+                        <img src="{{ product.picture2.url }}" class="slider_btn">
+                        <img src="{{ product.picture3.url }}" class="slider_btn">
                     </div>
                 </div>
                 <div class="product__info">
-                    <div class="info__text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea enim voluptatibus sapiente dolore vitae perspiciatis eos ducimus modi nemo provident repellat eveniet, doloribus consequuntur explicabo minima accusamus ratione sed? Assumenda soluta sequi ab autem totam cumque laudantium id quasi eligendi error asperiores, distinctio dolor consequuntur reiciendis porro quidem sint commodi.</div>
+                    <div class="info__text">{{ product.description }}</div>
                     <div class="info__buy">
-                        <div class="info__price">739&#8381</div>
+                        <div class="info__price">{{ product.price }} руб</div>
                         <button>В корзину</button>
                     </div>
                     <div class="info__date">Будет доставлено: <b>24.04.2024</b></div>
@@ -88,6 +89,6 @@
         </div>
     </div>
 
-    <script src="assets/js/product.js"></script>
+    <script src="{% static 'main/js/product.js' %}"></script>
 </body>
 </html>
