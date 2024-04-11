@@ -134,6 +134,8 @@
     width: 100%;
     cursor: pointer;
     transition: all 0.3s ease;
+    align-items: center;
+    font-size: 1.4rem;
 }
 .product__button:hover {
     background-color: #fff;
