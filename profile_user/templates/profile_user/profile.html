@@ -55,59 +55,35 @@
     <!-- Покупатель -->
     <div class="profile_page profile_user " id="client">
         <div class="profile">
-            <form class="profile-main container" method='post'>
-                {% csrf_token %}
+            <form class="profile-main container">
                 <label for="avatar_load" id="profile_avatar" class="profile__avatar" data-imgurl="{% static '/accounts/img/avatar.jpg' %}"></label>
 
-                <h1 class="profile__name">{{ user.first_name }} {{user.last_name}}</h1>
+                <h1 class="profile__name" id="name_client">{{ profile.first_name }} {{ profile.last_name }}</h1>
                 <div class="field_line">
                     <div class="form__field">
                         <h2 class="tab__title">Ваше имя: *</h2>
-                        {{ form.first_name }}
+                        <input type="text" disabled value='{{ profile.first_name }}'>
                     </div>
                     <div class="form__field">
                         <h2 class="tab__title">Ваша фамилия: *</h2>
-                        {{ form.last_name }}
+                        <input type="text" disabled value='{{ profile.last_name }}'>
                     </div>
                 </div>
                 <div class="form__field">
                     <h2 class="tab__title">E-mail: *</h2>
-                    {{ form.username }}
+                    <input type="text" disabled value='{{ profile.username }}'>
                 </div>
                 <div class="form__field">
                     <h2 class="tab__title">Ваш адрес: *</h2>
-                    {{ form.address }}
                     <div class="checkboxes">
-                        {% for city in cities %}
-                        <label class="checkbox">
-                            <div class="checkbox__button" data-category="address" id="{{ city.id }}">{{ city.name }}</div>
-                            <input type="checkbox">
-                        </label>
+                        {% for address_user in address %}
+                             <label class="checkbox">
+                                <div class="checkbox__button" data-category="address">{{ address_user }}</div>
+                            </label>
                         {% endfor %}
                     </div>
                 </div>
-                <button type='submit' class="profile__edit_btn">Подтвердить изменения</button>
             </form>
-        </div>
-
-        <!-- Корзина -->
-        <div class="orders">
-            <div class="orders-main container">
-                <div class="order">
-                    {% for product in cart %}
-                        {% for order in product.products.all %}
-                            <div class="order__image" data-imgurl="{{ order.picture.url }}"></div>
-                            <div class="order__info">
-                                <div class="info__text">
-                                    <h2 class="info__title">Заказ №0032-32458897</h2>
-                                    <div class="info__name">{{ order.name }}</div>
-                                </div>
-                                <div class="order__status">Ожидает получения</div>
-                            </div>
-                        {% endfor %}
-                    {% endfor %}
-                </div>
-            </div>
         </div>
     </div>
 
@@ -115,46 +91,40 @@
     <div class="profile_page profile_customer" id="company">
         <div class="profile">
             <form class="profile-main container" method="post">
-                {% csrf_token %}
                 <label for="avatar_load" id="company_avatar" class="profile__avatar" data-imgurl="{% static '/accounts/img/avatar.jpg' %}"></label>
-                <h1 class="profile__name">{{ user.organization }}</h1>
+                <h1 class="profile__name">{{ profile.organization }}</h1>
                 
                 <div class="field_line">
                     <div class="form__field">
                         <h2 class="tab__title">Название компании: *</h2>
-                        {{ form.organization }}
+                        <input type="text" disabled value='{{ profile.organization }}'>
                     </div>
                     <div class="form__field">
                         <h2 class="tab__title">Изделие производства: *</h2>
-                        {{ form.production }}
+                        <input type="text" disabled value='{{ profile.production }}'>
                     </div>
                 </div>
 
                 <div class="form__checkboxes">
                     <h2 class="checkboxes__title">Склады:</h2>
                     <div class="checkboxes">
-                        {{ form.list_warehouse }}
-                        {% for city in cities %}
-                        <label class="checkbox">
-                            <div class="checkbox__button" data-category="warehouse" id="{{ city.id }}">{{ city.name }}</div>
-                            <input type="checkbox">
-                        </label>
+                        {% for warehouse in warehouses %}
+                             <label class="checkbox">
+                                <div class="checkbox__button" data-category="address">{{ warehouse }}</div>
+                            </label>
                         {% endfor %}
                     </div>
                 </div>
                 <div class="form__checkboxes">
                     <h2 class="checkboxes__title">Пункты выдачи: </h2>
-                    {{ form.list_pick_up_point }}
                     <div class="checkboxes">
-                        {% for city in cities %}
-                        <label class="checkbox">
-                            <div class="checkbox__button" data-category="pick_up_point" id="{{ city.id }}">{{ city.name }}</div>
-                            <input type="checkbox">
-                        </label>
+                        {% for pick_up_point in pick_up_points %}
+                             <label class="checkbox">
+                                <div class="checkbox__button" data-category="address">{{ pick_up_point }}</div>
+                            </label>
                         {% endfor %}
                     </div>
                 </div>
-                <button type='submit' class="profile__edit_btn">Подтвердить изменения</button>
             </form>
         </div>
     </div>
@@ -173,7 +143,6 @@
     </div>
 
     
-    <script src="{% static 'accounts/js/registry.js' %}"></script>
     <script src="{% static 'profile_user/js/profile.js' %}"></script>
 </body>
 </html>
