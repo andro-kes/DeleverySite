@@ -65,16 +65,15 @@
                     </div>
                 </div>
                 <div class="product__info">
-                    <div class="info__text">{{ product.description }}</div>
                     <div class="info__text">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea enim voluptatibus sapiente dolore vitae perspiciatis eos ducimus modi nemo provident repellat eveniet, doloribus consequuntur explicabo minima accusamus ratione sed? Assumenda soluta sequi ab autem totam cumque laudantium id quasi eligendi error asperiores, distinctio dolor consequuntur reiciendis porro quidem sint commodi.
+                        {{ product.description }}
                         <div class="text__prop">
                             <div class="prop_key">Масса:</div>
-                            <div class="prop_val">350 kg</div>
+                            <div class="prop_val">{{ product.mass }}</div>
                         </div>
                         <div class="text__prop">
                             <div class="prop_key">Габариты:</div>
-                            <div class="prop_val">2x2x2 м.</div>
+                            <div class="prop_val">{{ product.size }}</div>
                         </div>
                     </div>
                     <div class="info__date">Варианты доставки:</div>
