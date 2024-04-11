@@ -1,0 +1,204 @@
+.products {
+    
+}
+.products-main {
+    padding: 4rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem
+}
+.products__title {
+    font-size: 2.2rem;
+    font-weight: 500;
+}
+.title__value {
+    color: var(--accent-color);
+}
+.products__filters {
+    padding: 2rem;
+    border-radius: 10px;
+    background-color: var(--accent20);
+    display: flex;
+    gap: 2rem;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+.filters__filter {
+    max-width: calc(50% - 10px);
+    width: 100%;
+}
+.filter__name {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--accent-color);
+    margin-bottom: 1rem;
+}
+.filters__filter input {
+    font-family: "Montserrat", sans-serif;
+    font-size: 1.4rem;
+    font-weight: 500;
+    padding: 0.8rem 1.4rem;
+    border: none;
+    border-radius: 10px;
+    background-color: var(--accent20);
+    color: var(--accent-color);
+    outline: none;
+    height: 40px;
+    width: 100%;
+}
+.filters__filter ::placeholder {
+    color: var(--accent-color);
+}
+.filters__accept {
+    padding: 1rem;
+    background-color: var(--accent-color);
+    outline: none;
+    border: none;
+    color: #fff;
+    font-weight: 500;
+    font-family: "Montserrat", sans-serif;
+    border: 2px solid var(--accent-color);
+    border-radius: 10px;
+    max-width: 160px;
+    max-height: 40px;
+    width: 100%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.filters__accept:hover {
+    background-color: #fff;
+    color: var(--accent-color);
+}
+.products__list {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+.list__product {
+    background-color: var(--accent20);
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+}
+.product__image {
+    background-color: var(--accent20);
+    max-width: 224px;
+    width: 100%;
+    height: 224px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.product__image img {
+    height: 80%;
+    object-fit: cover;
+}
+.product__info {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 2rem;
+}
+.product__title {
+    font-size: 1.8rem;
+    font-weight: 500;
+    margin-bottom: 1rem;
+}
+.product__description {
+    font-size: 1.4rem;
+    opacity: 85%;
+}
+.product__price {
+    margin-top: 1rem;
+    font-size: 2.2rem;
+    font-weight: 500;
+    color: var(--accent-color);
+}
+.product__buy {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+.product__button {
+    padding: 1rem;
+    background-color: var(--accent-color);
+    outline: none;
+    border: none;
+    color: #fff;
+    font-weight: 500;
+    font-family: "Montserrat", sans-serif;
+    border: 2px solid var(--accent-color);
+    border-radius: 10px;
+    max-width: 160px;
+    width: 100%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.product__button:hover {
+    background-color: #fff;
+    color: var(--accent-color);
+}
+.products__pagination {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+}
+.pagination__btn, .pagination__page {
+    padding: 1rem 1.5rem;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--accent-color);
+    background-color: #fff;
+    border-radius: 10px;
+    border: 2px solid var(--accent-color);
+    outline: none;
+    cursor: pointer;
+    max-height: 40px;
+}
+.btn_prev, .btn_next {
+    font-family: "Montserrat", sans-serif;
+    transition: all 0.3s ease;
+}
+.btn_prev:hover, .btn_next:hover {
+    background-color: var(--accent-color);
+    color: #fff;
+}
+.btn_curr {
+    background-color: var(--accent-color);
+    color: #fff;
+}
+
+@media (max-width: 1400px) {
+    .products-main {
+        padding-left: 3rem;
+        padding-right: 3rem;
+    }
+}
+@media (max-width: 700px) {
+    .list__product {
+        flex-direction: column;
+    }
+    .product__image {
+        max-width: 100%;
+        width: 100%;
+    }
+    .products__filters {
+        flex-direction: column;
+    }
+    .filters__filter {
+        max-width: 100%;
+        width: 100%;
+    }
+    .filters__accept {
+        max-width: 100%;
+        margin-top: 1rem;
+    }
+}
+@media (max-width: 400px) {
+    .products-main {
+        padding-left: 3rem;
+        padding-right: 3rem;
+    }
+}
