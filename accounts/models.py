@@ -29,5 +29,7 @@ class AccountsModel(AbstractUser):
     status = models.CharField(max_length=20, null=True)
     
     def __str__(self):
+        if self.organization:
+            return self.organization
         return str(self.username)
     

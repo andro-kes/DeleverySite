@@ -22,3 +22,7 @@ media/
 
 # Secret files and confidential data
 .env
+
+# other
+Расстояния.xlsx
+Расстояния_воздух.xlsx
