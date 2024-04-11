@@ -5,6 +5,7 @@ from django.views.generic.edit import UpdateView
 from django.contrib.auth import get_user_model
 from .forms import ProfileUpdateForm
 from accounts.models import Cities
+from main.models import UserCartModel
 from django.urls import reverse_lazy
 
 class ProfileView(UpdateView):
@@ -19,11 +20,9 @@ class ProfileView(UpdateView):
     def get_object(self, queryset=None):
         return self.request.user
     
-    def form_valid(self, form):
-        print('Form is valid')
-        return super().form_valid(form)
-    
     def get_context_data(self, **kwargs: Any):
         context =  super().get_context_data(**kwargs)
         context['cities'] = Cities.objects.all()
+        context['cart'] = UserCartModel.objects.filter(user=self.request.user)
+        print(UserCartModel.objects.filter(user=self.request.user))
         return context

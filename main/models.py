@@ -10,6 +10,8 @@ class OrderModel(models.Model):
     size = models.CharField(max_length=20)
     mass = models.FloatField()
     description = models.TextField()
+    number = models.CharField(max_length=14, null=True)
+    status = models.CharField(max_length=20, null=True)
     
     # компания, которой принадлежит товар
     company = models.ForeignKey('accounts.AccountsModel', on_delete=models.CASCADE)
@@ -33,3 +35,10 @@ class OrderModel(models.Model):
 class UserCartModel(models.Model):
     user = models.OneToOneField('accounts.AccountsModel', related_name='user_cart', on_delete=models.CASCADE)
     products = models.ManyToManyField(OrderModel, related_name='products', blank=True)
+
+    def __str__(self):
+        return str(self.user)
+    
+    class Meta:
+        verbose_name = 'Корзина'
+        verbose_name_plural = 'Корзины'

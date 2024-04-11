@@ -22,6 +22,19 @@ tabsBtn.forEach(i => {
 let checkboxes = document.querySelectorAll(".checkbox__button");
 
 checkboxes.forEach(checkbox => {
+    // new
+    const category = checkbox.dataset.category;
+    const cityPk = checkbox.id;
+    let checkboxInput;
+    if(category==='address'){
+        checkboxInput = document.querySelector(`#id_${category}_${cityPk-1}`);
+    } else{
+        checkboxInput = document.querySelector(`#id_list_${category}_${cityPk-1}`);
+    }
+    if(checkboxInput.checked){
+        checkbox.classList.toggle("_checked");
+    }
+
     checkbox.addEventListener('click', f => {
         checkbox.classList.toggle("_checked");
         const category = checkbox.dataset.category;

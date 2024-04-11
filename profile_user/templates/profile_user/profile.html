@@ -17,6 +17,7 @@
     <title>Hack2024</title>
 </head>
 <body>
+    <div hidden id="value_status">{{ user.status }}</div>
     <div class="header">
         <div class="header-main container">
             <a href="{% url 'main' %}" class="header__logo">Kodopes</a>
@@ -51,15 +52,12 @@
         </div>
     </div>
 
-    <div class="profile_page profile_user _active">
+    <!-- Покупатель -->
+    <div class="profile_page profile_user " id="client">
         <div class="profile">
             <form class="profile-main container" method='post'>
                 {% csrf_token %}
-                <label for="avatar_load" class="profile__avatar" data-imgurl="{% static '/accounts/img/avatar.jpg' %}">
-                
-                </label>
-                <input type="file" id="avatar_load">
-                <p class="profile__hint">*Нажмите на картинку, чтобы сменить её</p>
+                <label for="avatar_load" id="profile_avatar" class="profile__avatar" data-imgurl="{% static '/accounts/img/avatar.jpg' %}"></label>
 
                 <h1 class="profile__name">{{ user.first_name }} {{user.last_name}}</h1>
                 <div class="field_line">
@@ -92,116 +90,71 @@
             </form>
         </div>
 
+        <!-- Корзина -->
         <div class="orders">
             <div class="orders-main container">
                 <div class="order">
-                    <div class="order__image" data-imgurl="https://hoz54.ru/wp-content/uploads/2017/03/25-303.jpg"></div>
-                    <div class="order__info">
-                        <div class="info__text">
-                            <h2 class="info__title">Заказ №0032-32458897</h2>
-                            <div class="info__name">Очиститель туалетов молекулярный O2B4OSrAl</div>
-                        </div>
-                        <div class="order__status">Ожидает получения</div>
-                    </div>
-                </div>
-                <div class="order">
-                    <div class="order__image" data-imgurl="https://hoz54.ru/wp-content/uploads/2017/03/25-303.jpg"></div>
-                    <div class="order__info">
-                        <div class="info__text">
-                            <h2 class="info__title">Заказ №0032-32458897</h2>
-                            <div class="info__name">Очиститель туалетов молекулярный O2B4OSrAl</div>
-                        </div>
-                        <div class="order__status">24.04.2024</div>
-                    </div>
-                </div>
-                <div class="order">
-                    <div class="order__image" data-imgurl="https://ir.ozone.ru/s3/multimedia-d/c1000/6011737525.jpg"></div>
-                    <div class="order__info">
-                        <div class="info__text">
-                            <h2 class="info__title">Заказ №0032-32458897</h2>
-                            <div class="info__name">Очиститель туалетов молекулярный O2B4OSrAl</div>
-                        </div>
-                        <div class="order__status">24.04.2024</div>
-                    </div>
-                </div>
-                <div class="order">
-                    <div class="order__image" data-imgurl="https://ir.ozone.ru/s3/multimedia-d/c1000/6011737525.jpg"></div>
-                    <div class="order__info">
-                        <div class="info__text">
-                            <h2 class="info__title">Заказ №0032-32458897</h2>
-                            <div class="info__name">Очиститель туалетов молекулярный O2B4OSrAl</div>
-                        </div>
-                        <div class="order__status">24.04.2024</div>
-                    </div>
+                    {% for product in cart %}
+                        {% for order in product.products.all %}
+                            <div class="order__image" data-imgurl="{{ order.picture.url }}"></div>
+                            <div class="order__info">
+                                <div class="info__text">
+                                    <h2 class="info__title">Заказ №0032-32458897</h2>
+                                    <div class="info__name">{{ order.name }}</div>
+                                </div>
+                                <div class="order__status">Ожидает получения</div>
+                            </div>
+                        {% endfor %}
+                    {% endfor %}
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="profile_page profile_customer">
+    <!-- Компания -->
+    <div class="profile_page profile_customer" id="company">
         <div class="profile">
-            <form class="profile-main container">
-                <label for="avatar_load" class="profile__avatar" data-imgurl="accounts/img/avatar.jpg">
-                    
-                </label>
-                <input type="file" id="avatar_load">
-                <p class="profile__hint">*Нажмите на картинку, чтобы сменить её</p>
-                <h1 class="profile__name">Кызылбеково</h1>
+            <form class="profile-main container" method="post">
+                {% csrf_token %}
+                <label for="avatar_load" id="company_avatar" class="profile__avatar" data-imgurl="{% static '/accounts/img/avatar.jpg' %}"></label>
+                <h1 class="profile__name">{{ user.organization }}</h1>
                 
                 <div class="field_line">
                     <div class="form__field">
                         <h2 class="tab__title">Название компании: *</h2>
-                        <input type="text" required maxlength="50" placeholder="Введите сюда" value="Кызылбеково">
+                        {{ form.organization }}
                     </div>
                     <div class="form__field">
                         <h2 class="tab__title">Изделие производства: *</h2>
-                        <input type="text" required maxlength="50" placeholder="Введите сюда" value="Здесь уже что-то есть">
+                        {{ form.production }}
                     </div>
                 </div>
 
                 <div class="form__checkboxes">
                     <h2 class="checkboxes__title">Склады:</h2>
                     <div class="checkboxes">
+                        {{ form.list_warehouse }}
+                        {% for city in cities %}
                         <label class="checkbox">
-                            <div class="checkbox__button">Краснодар</div>
+                            <div class="checkbox__button" data-category="warehouse" id="{{ city.id }}">{{ city.name }}</div>
                             <input type="checkbox">
                         </label>
-                        <label class="checkbox">
-                            <div class="checkbox__button">Москва</div>
-                            <input type="checkbox">
-                        </label>
-                        <label class="checkbox">
-                            <div class="checkbox__button">Санкт-Петербург</div>
-                            <input type="checkbox">
-                        </label>
-                        <label class="checkbox">
-                            <div class="checkbox__button">Нижний Новгород</div>
-                            <input type="checkbox">
-                        </label>
+                        {% endfor %}
                     </div>
                 </div>
                 <div class="form__checkboxes">
                     <h2 class="checkboxes__title">Пункты выдачи: </h2>
+                    {{ form.list_pick_up_point }}
                     <div class="checkboxes">
+                        {% for city in cities %}
                         <label class="checkbox">
-                            <div class="checkbox__button">Краснодар</div>
+                            <div class="checkbox__button" data-category="pick_up_point" id="{{ city.id }}">{{ city.name }}</div>
                             <input type="checkbox">
                         </label>
-                        <label class="checkbox">
-                            <div class="checkbox__button">Москва</div>
-                            <input type="checkbox">
-                        </label>
-                        <label class="checkbox">
-                            <div class="checkbox__button">Санкт-Петербург</div>
-                            <input type="checkbox">
-                        </label>
-                        <label class="checkbox">
-                            <div class="checkbox__button">Нижний Новгород</div>
-                            <input type="checkbox">
-                        </label>
+                        {% endfor %}
                     </div>
                 </div>
-                <button class="profile__edit_btn">Подтвердить изменения</button>
+                <button type='submit' class="profile__edit_btn">Подтвердить изменения</button>
             </form>
         </div>
     </div>
