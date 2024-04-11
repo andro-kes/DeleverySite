@@ -15,5 +15,6 @@ deliveryOptions.forEach(opt => {
         document.querySelector(".delivery__option._picked").classList.remove("_picked");
         opt.classList.add("_picked");
         document.querySelector(".delivery input").value = opt.dataset.val;
+        document.querySelector(".info__date b").innerHTML = opt.dataset.date;
     }    
 });
