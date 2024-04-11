@@ -9,3 +9,11 @@ subs.forEach(sub => {
         main.setAttribute("src", sub.getAttribute("src"));
     };
 });
+let deliveryOptions = document.querySelectorAll(".delivery__option");
+deliveryOptions.forEach(opt => {
+    opt.onclick = () => {
+        document.querySelector(".delivery__option._picked").classList.remove("_picked");
+        opt.classList.add("_picked");
+        document.querySelector(".delivery input").value = opt.dataset.val;
+    }    
+});
