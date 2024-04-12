@@ -1,5 +1,5 @@
 .hero {
-    background: url('/static/accounts/img/Pattern.svg');
+    background: url(../images/Pattern.svg);
     background-color: var(--accent50);
 }
 .hero-main {
@@ -42,6 +42,7 @@
 }
 .offers-main {
     display: flex;
+    justify-content: space-between;
     min-height: 500px;
 }
 .offers__dscr {
@@ -97,11 +98,11 @@
 .card__title {
     font-size: 22px;
     font-weight: 700;
-    color: var(--accent70);
+    color: var(--accent-color);
 }
 .card__props {
     font-size: 14px;
-    color: var(--accent70);
+    color: var(--accent-color);
     margin-top: 18px;
     display: flex;
     flex-direction: column;
@@ -115,8 +116,8 @@
     padding: 9px 54px;
     font-weight: 700;
     font-size: 16px;
-    color: var(--accent70);
-    border: 2px solid var(--accent70);
+    color: var(--accent-color);
+    border: 2px solid var(--accent-color);
     border-radius: 10px;
     width: 100%;
     transition: all 0.3s ease;
@@ -125,7 +126,7 @@
     transition: all 0.3s ease;
 }
 .card__action:hover {
-    background-color: var(--accent70);
+    background-color: var(--accent-color);
     color: #fff;
 }
 
@@ -139,6 +140,10 @@
     display: flex;
     justify-content: space-between;
 }
+.guide__card img {
+    width: 130%;
+    object-fit: cover;
+}
 .guide__card:nth-child(odd) {
     flex-direction: row-reverse;
 }
@@ -147,6 +152,7 @@
 }
 .guide__card-image {
     border-radius: 10px;
+    overflow: hidden;
     background-color: var(--accent20);
     max-width: 498px;
     height: 340px;
