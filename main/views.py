@@ -1,17 +1,16 @@
 from typing import Any
-from django.db.models.query import QuerySet
 from django.shortcuts import render, redirect 
 from django.http import JsonResponse
 from django.views.generic.base import View
 from django.views.generic.detail import DetailView
 from .forms import SearchProductForm
 from .models import OrderModel, UserCartModel
-from django.views.generic.list import ListView
+from django.views.generic.list import ListView, MultipleObjectMixin
 from django.contrib.auth.decorators import login_required
-from django.views.decorators.csrf import csrf_protect
 from openpyxl import load_workbook
 import heapq
 import os
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 class MainView(View):
     """ 
@@ -36,20 +35,33 @@ class MainView(View):
         return redirect('results')
 
 class ResultsView(ListView):
-    """ 
-    Класс для показа результатов по поиску продуктов
-    """
     template_name = 'main/results.html'
+
     def get_queryset(self):
-        # распаковка чек всех айди через сессию и нахождение их в модели Заказов
         queryset_ids = self.request.session.get('queryset_ids', [])
         return OrderModel.objects.filter(id__in=queryset_ids)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        page = self.request.GET.get('page')
+        queryset = self.get_queryset()
+        paginator = Paginator(queryset, 10)  # количество объектов на странице
+        try:
+            objects = paginator.page(page)
+        except PageNotAnInteger:
+            objects = paginator.page(1)
+        except EmptyPage:
+            objects = paginator.page(paginator.num_pages)
+        context['page_obj'] = objects
+        return context
+
     
 def add_to_cart(request):
     """
     Добавление в корзину
     """
     product_id = request.POST.get('product_id')
+    print(product_id)
     if product_id:
         product = OrderModel.objects.get(id=product_id)
         user_cart = UserCartModel.objects.get(user=request.user)

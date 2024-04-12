@@ -4,6 +4,7 @@ document.querySelectorAll('.add-to-cart-btn').forEach(function(btn) {
     btn.addEventListener('click', function(event) {
       event.preventDefault();
       var productId = this.getAttribute('id');
+      console.log(productId)
       var csrftoken = Cookies.get('csrftoken');
       $.ajax({
         url: '/add/',

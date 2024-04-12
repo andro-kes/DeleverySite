@@ -77,22 +77,21 @@
                             <div class="product__price">{{ product.price }}</div>
                         </div>
                         <div class="product__buy">
-                            <button class="product__watch product__button">Просмотреть</button>
-                            <a href="{% url 'add_to_cart' %}" id="{{ product.id }}" class="product__watch product__button">В корзину</a>
+                            <a class="product__watch product__button" href="{% url 'detail' product.id %}">Просмотреть</a>
+                            <a href="{% url 'add_to_cart' %}" id="{{ product.id }}" class="product__watch product__button add-to-cart-btn">В корзину</a>
                         </div>
                     </div>
                 </div>
                 {% endfor %}
             </div>
             <div class="products__pagination">
-                <button class="pagination__btn btn_prev">Назад</button>
-                <div class="pagination__page btn_curr">1</div>
-                <div class="pagination__page">2</div>
-                <div class="pagination__page">3</div>
-                <div class="pagination__page">4</div>
-                <div class="pagination__page">5</div>
-                <div class="pagination__page">6</div>
-                <button class="pagination__btn btn_next">Вперёд</button>
+                {% if page_obj.has_previous %}
+                    <a class="pagination__btn btn_prev" href="?page={{ page_obj.previous_page_number }}">Назад</a>
+                {% endif %}
+                <div class="pagination__page btn_curr">{{ page_obj.number }} из {{ page_obj.paginator.num_pages }}</div>
+                {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number }}" class="pagination__page">Вперед</a>
+                {% endif %}
             </div>
         </div>
     </div>

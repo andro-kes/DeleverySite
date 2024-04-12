@@ -24,7 +24,7 @@
 <body>
     <div class="header">
         <div class="header-main container">
-            <a href="/index.html" class="header__logo">Kodopes</a>
+            <a href="{% url 'main' %}" class="header__logo">Kodopes</a>
             <div class="header-side">
                 <form class="header__search" method="post">
                     {% csrf_token %}
@@ -34,9 +34,15 @@
                     </button>
                 </form>
                 <div class="header__nav">
-                    <a href="/registry.html" class="nav__account">
+                    {% if user.is_authenticated %}
+                    <a href="{% url 'profile_update' user.id %}" class="nav__account">
                         <img src="{% static 'accounts/img/ui/user.svg' %}" alt="Аккаунт">
                     </a>
+                    {% else %}
+                     <a href="{% url 'signup' %}" class="nav__account">
+                        <img src="{% static 'accounts/img/ui/user.svg' %}" alt="Аккаунт">
+                    </a>
+                    {% endif %}
                     <a href="#" class="nav__vk">
                         <img src="{% static 'accounts/img/ui/vk.svg' %}" alt="VK">
                     </a>
@@ -165,8 +171,8 @@
         <div class="footer-main container">
             <h1 class="footer__title">Kodopes</h1>
             <div class="footer__nav">
-                <a href="/index.html">Главная</a>
-                <a href="/index.html">О доставке</a>
+                <a href="{% url 'main' %}">Главная</a>
+                <a href="{% url 'main' %}">О доставке</a>
                 <a href="/privacy-policy.html">Политика конфиденциальности</a>
                 <a href="/contacts.html">Контакты</a>
                 <a href="#">FAQ</a>
