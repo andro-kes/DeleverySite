@@ -11,6 +11,7 @@ from openpyxl import load_workbook
 import heapq
 import os
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from .filters import OrderFilter
 
 class MainView(View):
     """ 
@@ -32,20 +33,26 @@ class MainView(View):
         queryset = OrderModel.objects.filter(category__icontains=value)
         # получаем айди всех найденных элементов
         request.session['queryset_ids'] = list(queryset.values_list('id', flat=True))
+        request.session['search_word'] = value
         return redirect('results')
 
 class ResultsView(ListView):
+    '''
+    Класс для показа товаров по результатам поиска
+    '''
     template_name = 'main/results.html'
+    filterset_class = OrderFilter
 
     def get_queryset(self):
         queryset_ids = self.request.session.get('queryset_ids', [])
-        return OrderModel.objects.filter(id__in=queryset_ids)
+        return OrderModel.objects.filter(id__in=queryset_ids).order_by('price')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         page = self.request.GET.get('page')
         queryset = self.get_queryset()
-        paginator = Paginator(queryset, 10)  # количество объектов на странице
+        filterset = self.filterset_class(self.request.GET, queryset=queryset)
+        paginator = Paginator(filterset.qs, 10)  # количество объектов на странице
         try:
             objects = paginator.page(page)
         except PageNotAnInteger:
@@ -54,6 +61,8 @@ class ResultsView(ListView):
             objects = paginator.page(paginator.num_pages)
         context['page_obj'] = objects
         context['form'] = SearchProductForm()
+        context['search_word'] = self.request.session.get('search_word')
+        context['filterset'] = filterset
         return context
 
     

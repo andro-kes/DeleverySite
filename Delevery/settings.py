@@ -27,10 +27,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     
-    # 3-rd party
+    # local
     'accounts',
     'main',
     'profile_user',
+    
+    # 3-rd party
+    'django_filters',
 ]
 
 # Auth
