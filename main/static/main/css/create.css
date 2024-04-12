@@ -1,0 +1,103 @@
+.create-main {
+    padding: 6rem 0 8rem 0;
+}
+.create__title {
+    font-size: 2.2rem;
+    font-weight: 500;
+    color: var(--accent-color);
+}
+.create-main .field_line {
+    justify-content: flex-start;
+    align-items: flex-end;
+    gap: 2rem;
+}
+.registry__tab button {
+    transition: all 0.3s ease;
+    border: 2px solid var(--accent-color);
+}
+.registry__tab button:hover {
+    background-color: #fff;
+    color: var(--accent-color);
+}
+.create__tags {
+    display: flex;
+    gap: 1rem;
+}
+.tags__tag {
+    padding: 1rem;
+    background-color: #fff;
+    color: var(--accent-color);
+    border: 2px solid var(--accent-color);
+    border-radius: 10px;
+    font-weight: 500;
+    font-size: 1.4rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+.tag__delete {
+    width: 1rem;
+    height: 1rem;
+    cursor: pointer;
+}
+.create__tags input {
+    opacity: 0;
+    visibility: hidden;
+    position: absolute;
+}
+.create__images {
+    width: 100%;
+    padding: 2rem 2.6rem;
+    background-color: var(--accent20);
+    border-radius: 10px;
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+.images__image img {
+    width: 120px;
+    max-height: 120px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+.images__image input {
+    opacity: 0;
+    visibility: hidden;
+    position: absolute;
+}
+.images_title {
+    margin-bottom: 0;
+}
+.images__clean {
+    padding: 1rem;
+    background-color: var(--accent-color);
+    color: #fff;
+    border: 2px solid var(--accent-color);
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 1.4rem;
+    cursor: pointer;
+    max-width: 140px;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+.images__clean:hover {
+    background-color: #fff;
+    color: var(--accent-color);
+}
+
+@media (max-width: 840px) {
+    .images__clean, .registry__tab button {
+        max-width: 100%;
+        width: 100%;
+    }
+}
+@media (max-width: 600px) {
+    .create__images {
+        flex-direction: column;
+        align-items: center;
+    }
+    .images__image img {
+        width: 100%;
+    }
+}
