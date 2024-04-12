@@ -20,12 +20,6 @@
         <div class="header-main container">
             <a href="{% url 'main' %}" class="header__logo">Kodopes</a>
             <div class="header-side">
-                <form class="header__search">
-                    <input type="text" required placeholder="Поиск">
-                    <button>
-                        <img src="{% static 'accounts/img/ui/search.svg' %}" alt="Искать">
-                    </button>
-                </form>
                 <div class="header__nav">
                     <a href="{% url 'signup' %}" class="nav__account">
                         <img src="{% static 'accounts/img/ui/user.svg' %}" alt="Аккаунт">
@@ -165,7 +159,7 @@
             <h1 class="footer__title">Kodopes</h1>
             <div class="footer__nav">
                 <a href="{% url 'main' %}">Главная</a>
-                <a href="/index.html">О доставке</a>
+                <a href="{% url 'main' %}">О доставке</a>
                 <a href="/privacy-policy.html">Политика конфиденциальности</a>
                 <a href="/contacts.html">Контакты</a>
                 <a href="#">FAQ</a>

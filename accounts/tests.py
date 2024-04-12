@@ -46,7 +46,7 @@ class AccountsModelTest(TestCase):
         self.assertEqual(self.user.production, 'Test Production')
 
     def test_user_str(self):
-        self.assertEqual(str(self.user), 'testuser')
+        self.assertEqual(str(self.user.username), 'testuser')
         
         
 from django.test import TestCase
@@ -62,17 +62,20 @@ class AccountCreationFormTest(TestCase):
     def test_form_valid(self):
         data = {
             'username': 'testuser',
-            'address': [self.city1.id, self.city2.id],
+            'address': [self.city1.id],
             'list_warehouse': [self.city1.id],
             'list_pick_up_point': [self.city2.id],
             'password1': 'testpass12345',
-            'password2': 'testpass12345',  # изменили значение пароля
+            'password2': 'testpass12345', 
             'organization': 'Test Organization',
             'production': 'Test Production',
             'first_name': 'Test',
             'last_name': 'User',
+            'status': 'test status'
         }
         form = AccountCreationForm(data)
+        print(form.errors)
+
         self.assertTrue(form.is_valid())
 
 
@@ -108,6 +111,7 @@ class AccountCreationFormTest(TestCase):
             'production': 'Test Production',
             'first_name': 'Test',
             'last_name': 'User',
+            'status': 'status',
         }
         form = AccountCreationForm(data)
         user = form.save()

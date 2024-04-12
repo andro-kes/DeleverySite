@@ -28,12 +28,15 @@
                     </button>
                 </form>
                 <div class="header__nav">
-                    <a href="/registry.html" class="nav__account">
-                        <img src="{% static '/accounts/img/ui/user.svg' %}" alt="Аккаунт">
+                    {% if user.is_authenticated %}
+                    <a href="{% url 'profile_update' user.id %}" class="nav__account">
+                        <img src="{% static 'accounts/img/ui/user.svg' %}" alt="Аккаунт">
                     </a>
-                    <a href="#" class="nav__vk">
-                        <img src="{% static '/accounts/img/ui/vk.svg' %}" alt="VK">
+                    {% else %}
+                     <a href="{% url 'signup' %}" class="nav__account">
+                        <img src="{% static 'accounts/img/ui/user.svg' %}" alt="Аккаунт">
                     </a>
+                    {% endif %}
                 </div>
             </div>
         </div>

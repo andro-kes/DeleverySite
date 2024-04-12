@@ -15,31 +15,30 @@ class OrderModelTests(TestCase):
         # создаем тестовый город
         city = Cities.objects.create(name='Test City')
         # создаем тестовый товар
-        OrderModel.objects.create(
+        order = OrderModel.objects.create(
             name='Test Product',
-            picture='media/test_picture.jpg',
             price=100,
             size='S',
             mass=1.0,
             description='Test product description',
             company=user,
             category='test_category',
-            warehouse=city,
         )
+        order.warehouse.add(city)
+        order.save()
 
     def test_order_model(self):
         order = OrderModel.objects.get(id=1)
         # проверяем, что поля имеют правильные значения
         self.assertEqual(order.name, 'Test Product')
-        self.assertEqual(order.picture, 'media/test_picture.jpg')
         self.assertEqual(order.price, 100)
         self.assertEqual(order.size, 'S')
         self.assertEqual(order.mass, 1.0)
         self.assertEqual(order.description, 'Test product description')
         self.assertEqual(order.category, 'test_category')
         self.assertEqual(str(order), 'Test Product')
-        self.assertTrue(isinstance(order.warehouse, Cities))
-        self.assertEqual(order.warehouse.name, 'Test City')
+        self.assertTrue(isinstance(order.warehouse.all()[0], Cities))
+        self.assertEqual(order.warehouse.all()[0].name, 'Test City')
 
     def test_order_str(self):
         order = OrderModel.objects.get(id=1)

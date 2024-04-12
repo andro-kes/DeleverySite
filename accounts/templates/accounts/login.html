@@ -19,12 +19,6 @@
         <div class="header-main container">
             <a href="{% url 'main' %}" class="header__logo">Kodopes</a>
             <div class="header-side">
-                <form class="header__search">
-                    <input type="text" required placeholder="Поиск">
-                    <button>
-                        <img src="{% static 'accounts/img/ui/search.svg' %}" alt="Искать">
-                    </button>
-                </form>
                 <div class="header__nav">
                     <a href="{% url 'signup' %}" class="nav__account">
                         <img src="{% static 'accounts/img/ui/user.svg' %}" alt="Аккаунт">

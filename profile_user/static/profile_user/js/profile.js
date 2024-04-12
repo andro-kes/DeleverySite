@@ -21,6 +21,7 @@ function setAvatars() {
 setAvatars();
 
 const statusValue = document.getElementById('value_status').textContent;
+console.log(statusValue)
 if(statusValue === 'Покупатель'){
     document.getElementById('client').classList.add('_active');
 } else{

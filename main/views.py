@@ -5,7 +5,7 @@ from django.views.generic.base import View
 from django.views.generic.detail import DetailView
 from .forms import SearchProductForm
 from .models import OrderModel, UserCartModel
-from django.views.generic.list import ListView, MultipleObjectMixin
+from django.views.generic.list import ListView
 from django.contrib.auth.decorators import login_required
 from openpyxl import load_workbook
 import heapq
@@ -65,7 +65,7 @@ class ResultsView(ListView):
         context['filterset'] = filterset
         return context
 
-    
+@login_required 
 def add_to_cart(request):
     """
     Добавление в корзину
@@ -183,6 +183,7 @@ class ProductDetailView(DetailView):
         context =  super().get_context_data(**kwargs) 
          
         # Получаем город пользователя
+        print(self.request.user.address.all())
         address = self.request.user.address.all()[0].name
         
         # Получим склады товара

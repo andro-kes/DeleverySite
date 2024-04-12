@@ -10,7 +10,7 @@ class AccountLoginView(LoginView):
     """
     authentication_form = AccountLoginForm
     template_name = 'accounts/login.html'
-    redirect_authenticated_user = True
+    
 
 class AccountLogoutView(LogoutView):
     """ 

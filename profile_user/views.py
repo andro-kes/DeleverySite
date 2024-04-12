@@ -1,4 +1,5 @@
 from typing import Any
+from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import UpdateView
@@ -7,6 +8,7 @@ from .forms import ProfileUpdateForm
 from accounts.models import Cities
 from main.models import UserCartModel
 from django.urls import reverse_lazy
+from main.forms import SearchProductForm
 
 class ProfileUpdateView(UpdateView):
     model = get_user_model()
@@ -20,10 +22,15 @@ class ProfileUpdateView(UpdateView):
     def get_object(self, queryset=None):
         return self.request.user
     
+    def form_valid(self, form):
+        form.save()
+        return super().form_valid(form)
+
     def get_context_data(self, **kwargs: Any):
         context =  super().get_context_data(**kwargs)
         context['cities'] = Cities.objects.all()
         context['cart'] = UserCartModel.objects.filter(user=self.request.user)
+        context['form_search'] = SearchProductForm()
         return context
     
 class ProfileView(DetailView):
@@ -40,4 +47,5 @@ class ProfileView(DetailView):
         context['address'] = profile_user.address.all()
         context['warehouses'] = profile_user.list_warehouse.all()
         context['pick_up_points'] = profile_user.list_pick_up_point.all()
+        context['form_search'] = SearchProductForm()
         return context
