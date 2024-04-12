@@ -31,10 +31,9 @@ checkboxes.forEach(checkbox => {
     } else{
         checkboxInput = document.querySelector(`#id_list_${category}_${cityPk-1}`);
     }
-    if(checkboxInput.checked){
+    if(checkboxInput && checkboxInput.checked){
         checkbox.classList.toggle("_checked");
     }
-
     checkbox.addEventListener('click', f => {
         checkbox.classList.toggle("_checked");
         const category = checkbox.dataset.category;

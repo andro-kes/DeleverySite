@@ -60,12 +60,24 @@
             <div class="product__row">
                 <div class="product__slider">
                     <div class="slider__main">
-                        <img src="{{ product.picture1.url }}">
+                        {% if product.picture1 %}
+                            <img src="{{ product.picture1.url }}">  
+                        {% elif product.picture2 %}
+                            <img src="{{ product.picture2.url }}">
+                        {% elif product.picture3 %}
+                            <img src="{{ product.picture3.url }}">
+                        {% endif%}
                     </div>
                     <div class="slider__sub">
-                        <img src="{{ product.picture1.url }}" class="slider_btn _slider_current">
-                        <img src="{{ product.picture2.url }}" class="slider_btn">
-                        <img src="{{ product.picture3.url }}" class="slider_btn">
+                        {% if product.picture1 %}
+                            <img src="{{ product.picture1.url }}" class="slider_btn _slider_current">
+                        {% endif %}   
+                        {% if product.picture2 %}
+                            <img src="{{ product.picture2.url }}" class="slider_btn">
+                        {% endif%}
+                        {% if product.picture3 %}
+                            <img src="{{ product.picture3.url }}" class="slider_btn">
+                        {% endif%}
                     </div>
                 </div>
                 <div class="product__info">

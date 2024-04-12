@@ -11,18 +11,18 @@ class OrderModel(models.Model):
     price = models.IntegerField()
     size = models.CharField(max_length=20)
     mass = models.FloatField()
-    description = models.TextField()
-    number = models.CharField(max_length=14, null=True)
+    description = models.CharField(max_length=250)
+    number = models.CharField(max_length=14, null=True, blank=True)
     status = models.CharField(max_length=20, null=True)
     
     # компания, которой принадлежит товар
-    company = models.ForeignKey('accounts.AccountsModel', on_delete=models.CASCADE)
+    company = models.ForeignKey('accounts.AccountsModel', on_delete=models.CASCADE, blank=True, null=True)
     
     # отвечает за находимость товара. Работает примерно как хештеги в запретграме)
     category = models.CharField(max_length=250)
     
     # склад, на котором находится этот товар
-    warehouse = models.ManyToManyField('accounts.Cities', related_name='warehouse_order')
+    list_warehouse = models.ManyToManyField('accounts.Cities', related_name='warehouse_order')
     
     def __str__(self):
         return self.name

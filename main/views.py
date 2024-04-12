@@ -1,9 +1,10 @@
 from typing import Any
+from django.forms import BaseModelForm
 from django.shortcuts import render, redirect 
-from django.http import JsonResponse
+from django.http import HttpResponse, JsonResponse
 from django.views.generic.base import View
 from django.views.generic.detail import DetailView
-from .forms import SearchProductForm
+from .forms import SearchProductForm, CreateOrderForm
 from .models import OrderModel, UserCartModel
 from django.views.generic.list import ListView
 from django.contrib.auth.decorators import login_required
@@ -12,6 +13,8 @@ import heapq
 import os
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .filters import OrderFilter
+from django.views.generic.edit import CreateView
+from accounts.models import Cities
 
 class MainView(View):
     """ 
@@ -35,6 +38,27 @@ class MainView(View):
         request.session['queryset_ids'] = list(queryset.values_list('id', flat=True))
         request.session['search_word'] = value
         return redirect('results')
+
+class CreateOrderView(CreateView):
+    template_name = 'main/create.html'
+    form_class = CreateOrderForm
+    success_url = '/'
+    
+    def form_valid(self, form: BaseModelForm):
+        form.instance.company = self.request.user
+        form.instance.picture1 = self.request.FILES.get('picture1')
+        print(self.request.FILES)
+        form.instance.picture2 = self.request.FILES.get('picture2')
+        form.instance.picture3 = self.request.FILES.get('picture3')
+        form.save()
+        return super().form_valid(form)
+
+    
+    def get_context_data(self, **kwargs: Any):
+        context =  super().get_context_data(**kwargs)
+        context['search_form'] = SearchProductForm()
+        context['cities'] = Cities.objects.all()
+        return context
 
 class ResultsView(ListView):
     '''
@@ -188,7 +212,7 @@ class ProductDetailView(DetailView):
         
         # Получим склады товара
         list_warehouse = []
-        for warehouse in self.object.warehouse.all():
+        for warehouse in self.object.list_warehouse.all():
             list_warehouse.append(warehouse.name)
             
         # Получаем пункты выдачи компании

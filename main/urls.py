@@ -6,4 +6,5 @@ urlpatterns = [
     path('add/', views.add_to_cart, name='add_to_cart'),
     path('<int:pk>', views.ProductDetailView.as_view(), name='detail'),
     path('results/', views.ResultsView.as_view(), name='results'),
+    path('create/', views.CreateOrderView.as_view(), name='create'),
 ]

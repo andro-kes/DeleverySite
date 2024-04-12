@@ -1,37 +1,42 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <link rel="stylesheet" href="assets/css/reset.css">
-    <link rel="stylesheet" href="assets/css/fonts.css">
-    <link rel="stylesheet" href="assets/css/header.css">
-    <link rel="stylesheet" href="assets/css/registry.css">
-    <link rel="stylesheet" href="assets/css/create.css">
-    <link rel="stylesheet" href="assets/css/main.css">
-    <link rel="stylesheet" href="assets/css/footer.css">
+
+    <link rel="stylesheet" href="{% static 'main/css/create.css' %}">
+    <link rel="stylesheet" href="{% static '/accounts/css/registry.css' %}">
+    <link rel="stylesheet" href="{% static '/accounts/css/reset.css' %}">
+    <link rel="stylesheet" href="{% static '/accounts/css/fonts.css' %}">
+    <link rel="stylesheet" href="{% static '/accounts/css/header.css' %}">
+    <link rel="stylesheet" href="{% static '/accounts/css/main.css' %}">
+    <link rel="stylesheet" href="{% static '/accounts/css/footer.css' %}">
 
     <title>Hack2024</title>
 </head>
 <body>
     <div class="header">
         <div class="header-main container">
-            <a href="/index.html" class="header__logo">Kodopes</a>
+            <a href="{% url 'main' %}" class="header__logo">Kodopes</a>
             <div class="header-side">
-                <form class="header__search">
-                    <input type="text" required placeholder="Поиск">
-                    <button>
-                        <img src="assets/images/ui/search.svg" alt="Искать">
+                <form class="header__search" method="post" action="{% url 'main' %}">
+                    {% csrf_token %}
+                    {{ search_form.search_field }}
+                    <button type="submit">
+                        <img src="{% static '/accounts/img/ui/search.svg' %}" alt="Искать">
                     </button>
                 </form>
                 <div class="header__nav">
-                    <a href="/registry.html" class="nav__account">
-                        <img src="assets/images/ui/user.svg" alt="Аккаунт">
+                    {% if user.is_authenticated %}
+                    <a href="{% url 'profile_update' user.id %}" class="nav__account">
+                        <img src="{% static '/accounts/img/ui/user.svg' %}" alt="Аккаунт">
                     </a>
-                    <a href="#" class="nav__vk">
-                        <img src="assets/images/ui/vk.svg" alt="VK">
+                    {% else %}
+                     <a href="{% url 'signup' %}" class="nav__account">
+                        <img src="{% static '/accounts/img/ui/user.svg' %}" alt="Аккаунт">
                     </a>
+                    {% endif %}
                 </div>
             </div>
         </div>
@@ -50,31 +55,40 @@
             <h1 class="create__title">
                 Добавить товар
             </h1>
-            <form class="registry__tab _customer_tab tab_active">
+            <form class="registry__tab _customer_tab tab_active" enctype='multipart/form-data' method='post'>
+                {% csrf_token %}
+                {{ form.errors }}
                 <div class="field_line">
                     <div class="form__field">
                         <h2 class="tab__title">Название товара: *</h2>
-                        <input type="text" required maxlength="50" placeholder="Введите название">
+                        {{ form.name }}
                     </div>
                     <div class="form__field">
                         <h2 class="tab__title">Цена в руб.: *</h2>
-                        <input type="number" required maxlength="50" placeholder="Введите цену">
+                        {{ form.price }}
                     </div>
                 </div>
                 <div class="field_line">
                     <div class="form__field">
                         <h2 class="tab__title">Масса товара: *</h2>
-                        <input type="text" required maxlength="50" placeholder="Введите массу товара">
+                        {{ form.mass }}
                     </div>
                     <div class="form__field">
                         <h2 class="tab__title">Размеры товара по типу W H D: *</h2>
-                        <input type="text" required maxlength="50" placeholder="Например: 4 2 5">
+                        {{ form.size }}
+                    </div>
+                </div>
+                <div class="field_line">
+                    <div class="form__field">
+                        <h2 class="tab__title">Краткое описание товара *</h2>
+                        {{ form.description }}
                     </div>
                 </div>
                 <div class="field_line">
                     <div class="form__field">
                         <h2 class="tab__title">Теги товара: *</h2>
-                        <input type="text" id="tags_field" required maxlength="40" placeholder="Введите тег">
+                        <input type="text" id="tags_field" maxlength="40" placeholder="Введите тег">
+                        {{ form.category }}
                     </div>
                     <button type="button" class="form__submit" onclick="addTag()">Добавить тег</button>
                 </div>
@@ -83,46 +97,23 @@
                 </div>
 
                 <div class="tab__title images_title">Загрузите изображения</div>    
-                <div class="create__images">
-                    <label class="images__image">
-                        <img src="assets/images/ui/pic.svg" data-default="assets/images/ui/pic.svg" id="pic1">
-                        <input type="file" data-imgid="pic1">
-                    </label>
-                    <label class="images__image">
-                        <img src="assets/images/ui/pic.svg" data-default="assets/images/ui/pic.svg" id="pic2">
-                        <input type="file" data-imgid="pic2">
-                    </label>
-                    <label class="images__image">
-                        <img src="assets/images/ui/pic.svg" data-default="assets/images/ui/pic.svg" id="pic3">
-                        <input type="file" data-imgid="pic3">
-                    </label>
-                </div>
-                <div class="images__clean">
-                    Очистить
-                </div>
+                {{ form.picture1 }}
+                {{ form.picture2 }}
+                {{ form.picture3 }}
 
                 <div class="form__checkboxes">
                     <h2 class="checkboxes__title">Склады:</h2>
                     <div class="checkboxes">
+                        {{ form.list_warehouse }}
+                        {% for city in cities %}
                         <label class="checkbox">
-                            <div class="checkbox__button">Краснодар</div>
+                            <div class="checkbox__button" data-category="warehouse" id="{{ city.id }}">{{ city.name }}</div>
                             <input type="checkbox">
                         </label>
-                        <label class="checkbox">
-                            <div class="checkbox__button">Москва</div>
-                            <input type="checkbox">
-                        </label>
-                        <label class="checkbox">
-                            <div class="checkbox__button">Санкт-Петербург</div>
-                            <input type="checkbox">
-                        </label>
-                        <label class="checkbox">
-                            <div class="checkbox__button">Нижний Новгород</div>
-                            <input type="checkbox">
-                        </label>
+                        {% endfor %}
                     </div>
                 </div>
-
+                    {{ form.status }}
                 <button class="form__submit">Подтвердить</button>
             </form>
         </div>
@@ -142,7 +133,7 @@
     </div>
 
     
-    <script src="assets/js/registry.js"></script>
-    <script src="assets/js/create.js"></script>
+    <script src="{% static '/accounts/js/registry.js' %}"></script>
+    <script src="{% static 'main/js/create.js' %}"></script>
 </body>
 </html>
