@@ -1,7 +1,4 @@
 <!-- результат поиска, лента товаров, которые были найдены -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>    
-<script src="https://cdn.jsdelivr.net/npm/js-cookie@3/dist/js.cookie.min.js"></script>
-
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
@@ -23,10 +20,11 @@
         <div class="header-main container">
             <a href="/index.html" class="header__logo">Kodopes</a>
             <div class="header-side">
-                <form class="header__search">
-                    <input type="text" required placeholder="Поиск">
-                    <button>
-                        <img src="{% static '/accounts/img/ui/search.svg' %}" alt="Искать">
+                <form class="header__search" method="post" action="{% url 'main' %}">
+                    {% csrf_token %}
+                    {{ form.search_field }}
+                    <button type="submit">
+                        <img src="{% static 'accounts/img/ui/search.svg' %}" alt="Искать">
                     </button>
                 </form>
                 <div class="header__nav">
@@ -109,5 +107,7 @@
         </div>
     </div>
     <script src="{% static 'main/js/add_to_cart.js' %}"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>    
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@3/dist/js.cookie.min.js"></script>
 </body>
 </html>

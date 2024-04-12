@@ -154,6 +154,10 @@
     color: var(--accent-color);
     font-weight: 500;
 }
+a {
+    color: #fff;
+    text-decoration: none;
+}
 
 @media (max-width: 1400px) {
     .product-main {

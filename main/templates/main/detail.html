@@ -19,10 +19,11 @@
         <div class="header-main container">
             <a href="/index.html" class="header__logo">Kodopes</a>
             <div class="header-side">
-                <form class="header__search">
-                    <input type="text" required placeholder="Поиск">
-                    <button>
-                        <img src="{% static '/accounts/img/ui/search.svg' %}" alt="Искать">
+                <form class="header__search" method="post" action="{% url 'main' %}">
+                    {% csrf_token %}
+                    {{ form.search_field }}
+                    <button type="submit">
+                        <img src="{% static 'accounts/img/ui/search.svg' %}" alt="Искать">
                     </button>
                 </form>
                 <div class="header__nav">
@@ -66,7 +67,7 @@
                 </div>
                 <div class="product__info">
                     <div class="info__text">
-                        {{ product.description }}
+                        Описание: {{ product.description }}
                         <div class="text__prop">
                             <div class="prop_key">Масса:</div>
                             <div class="prop_val">{{ product.mass }}</div>
@@ -78,7 +79,7 @@
                     </div>
                     <div class="info__date">Варианты доставки:</div>
                     <div class="delivery">
-                        <div class="delivery__option _picked" data-val="econom" data-price='{{ result_price }} руб' data-date="{{ econom }} часов">
+                        <div class="delivery__option _picked" data-val="econom" data-price='{{ result_price_econom }} руб' data-date="{{ econom }} часов">
                             Econom
                         </div>
                         <div class="delivery__option" data-val="fast" data-date="{{ fast }} часов" data-price='{{ result_price_fast }} руб'>
@@ -89,8 +90,8 @@
                     <div class="info__date" id="delivery_date">Доставим через: <b>{{ econom }} часов</b></div>
                     <div class="info__date" id="delivery_date">{{ notifiction }}</div>
                     <div class="info__buy">
-                        <div class="info__price" id='result_price'>{{ result_price }} руб</div>
-                        <button>В корзину</button>
+                        <div class="info__price" id='result_price'>{{ result_price_econom }} руб</div>
+                        <button><a href="{% url 'add_to_cart' %}" id="{{ product.id }}" class="add-to-cart-btn">В корзину</a></button>
                     </div>
                 </div>
             </div>
@@ -111,5 +112,8 @@
     </div>
 
     <script src="{% static 'main/js/product.js' %}"></script>
+    <script src="{% static 'main/js/add_to_cart.js' %}"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>    
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@3/dist/js.cookie.min.js"></script>
 </body>
 </html>

@@ -53,6 +53,7 @@ class ResultsView(ListView):
         except EmptyPage:
             objects = paginator.page(paginator.num_pages)
         context['page_obj'] = objects
+        context['form'] = SearchProductForm()
         return context
 
     
@@ -104,93 +105,130 @@ class ProductDetailView(DetailView):
         # Открываем Excel файл
         app_path = os.path.dirname(__file__)
 
-        # Построение пути к файлу по земле
-        file_path_earth = os.path.join(app_path, 'Расстояния.xlsx')
-        # По воздуху
-        file_path_air = os.path.join(app_path, 'Расстояния_воздух.xlsx')
-        # Выбираем активный листы
+        # Построение пути к файлу econom
+        file_path_earth = os.path.join(app_path, 'Расстояния_econom.xlsx')
+        
+        # fast
+        file_path_air = os.path.join(app_path, 'Расстояния_fast.xlsx')
+        
+        # Выбираем активный листы econom
         wb = load_workbook(file_path_earth)
         sheet = wb.active
-        
+        # fast
         wb_air = load_workbook(file_path_air)
         sheet_air = wb_air.active
+        
         # Преобразуем данные в виде графа
+        # Получаем список всех городов, чтобы потом использовать их индексы
         cities_index_list = []
         for city in sheet.iter_rows(min_row=1, max_row=1, values_only=True):
             for name in city:
                 if name:
                     cities_index_list.append(name)
-        data_list = []
+                    
+        # Создаем словарь для econom
+        data_list_econom = []
         for city in sheet.iter_rows(min_row=2, values_only=True):
             data = [{'city': city[0]}]
             for i in range(1, len(city)):
                 if city[i] != None:
                     if city[i] != '-':
                         data.append({'city': cities_index_list[i-1], 'distance': int(city[i])})
-            data_list.append(data)
-            
-        data_list_air = []
+            data_list_econom.append(data)
+        
+        # fast    
+        data_list_fast = []
         for city in sheet_air.iter_rows(min_row=2, values_only=True):
             data = [{'city': city[0]}]
             for i in range(1, len(city)):
                 if city[i] != None:
                     if city[i] != '-':
                         data.append({'city': cities_index_list[i-1], 'distance': int(city[i])})
-            data_list_air.append(data)
+            data_list_fast.append(data)
+            
         # Преобразуем данные в виде графа
-        graph = {}
-        for city_data in data_list:
+        #econom
+        graph_econom = {}
+        for city_data in data_list_econom:
             city = city_data[0]['city']
-            graph[city] = [{'city': data['city'], 'distance': data['distance']} for data in city_data[1:]]
+            graph_econom[city] = [{'city': data['city'], 'distance': data['distance']} for data in city_data[1:]]
         
-        graph_air = {}
-        for city_data in data_list:
+        # fast
+        graph_fast = {}
+        for city_data in data_list_fast:
             city = city_data[0]['city']
-            graph_air[city] = [{'city': data['city'], 'distance': data['distance']} for data in city_data[1:]]
-        return (graph, graph_air)
+            graph_fast[city] = [{'city': data['city'], 'distance': data['distance']} for data in city_data[1:]]
+        # Возвращаем оба графа
+        return (graph_econom, graph_fast)
     
     def get_context_data(self, **kwargs: Any):
         # Скорость доставки в км/ч
-        v = 50
-        v_air = 200
-        # Цена за каждый час в рублях
-        price_list = 100
-        price_list_air = 500
+        v_econom = 50
+        v_fast = 200
         
-        context =  super().get_context_data(**kwargs)  
-        # Получим город пользователя
+        # Цена за каждый час в рублях
+        price_list_econom = 100
+        price_list_fast = 500
+        
+        # Получаем контекст от супер класса 
+        context =  super().get_context_data(**kwargs) 
+         
+        # Получаем город пользователя
         address = self.request.user.address.all()[0].name
+        
         # Получим склады товара
         list_warehouse = []
         for warehouse in self.object.warehouse.all():
             list_warehouse.append(warehouse.name)
-        # Получим пункты выдачи компании
+            
+        # Получаем пункты выдачи компании
         company = self.object.company
         list_pick_up_point = []
         for pick_up_point in company.list_pick_up_point.all():
             list_pick_up_point.append(pick_up_point.name)
+            
         # Получим все расстояния
-        shortest_paths = self.dijkstra(self.to_graph()[0], address)
-        shortest_paths_air = self.dijkstra(self.to_graph()[1], address)
-        # Найдем расстояния до каждого склада
-        list_distance = []
-        list_distance_air = []
-        for warehouse in list_warehouse:
-            distance = shortest_paths[warehouse]
-            list_distance.append(distance)
-        for warehouse in list_warehouse:
-            distance = shortest_paths_air[warehouse]
-            list_distance_air.append(distance)
         
+        # econom
+        shortest_paths_econom = self.dijkstra(self.to_graph()[0], address)
+        #fast
+        shortest_paths_fast = self.dijkstra(self.to_graph()[1], address)
+        
+        # Найдем расстояния до каждого склада
+        list_distance_econom = []
+        for warehouse in list_warehouse:
+            distance = shortest_paths_econom[warehouse]
+            list_distance_econom.append(distance)
+        # fast
+        list_distance_fast = []
+        for warehouse in list_warehouse:
+            distance = shortest_paths_fast[warehouse]
+            list_distance_fast.append(distance)
+        
+        # Проверям, есть ли в городе заказчика пункт выдачи компании-производителя
         if address in list_pick_up_point:
-            context['econom'] = min(list_distance)/v
-            context['fast'] = min(list_distance_air)/v_air
-            context['result_price_fast'] = (min(list_distance_air)/v)*price_list_air + int(self.object.price)
-            context['result_price_econom'] = (min(list_distance)/v)*price_list + int(self.object.price)
+            # Время для econom
+            context['econom'] = min(list_distance_econom)/v_econom
+            # Цена econom 
+            context['result_price_econom'] = (min(list_distance_econom)/v_econom)*price_list_econom + int(self.object.price)
+            
+            # Время для fast
+            context['fast'] = min(list_distance_fast)/v_fast
+            # Цена fast
+            context['result_price_fast'] = (min(list_distance_fast)/v_fast)*price_list_fast + int(self.object.price)
+        # Если пункта нет  
         else:
-            context['econom'] = (min(list_distance)/v)
-            context['result_price'] = (min(list_distance)/v)*2*price_list + int(self.object.price)
-            context['fast'] = (min(list_distance_air)/v_air)
-            context['result_price_fast'] = (min(list_distance_air)/v)*2*price_list_air + int(self.object.price)
+            # Время для econom
+            context['econom'] = (min(list_distance_econom)/v_econom)
+            # Цена econom 
+            context['result_price_econom'] = (min(list_distance_econom)/v_econom)*2*price_list_econom+ int(self.object.price)
+            
+            # Время для fast
+            context['fast'] = (min(list_distance_fast)/v_fast)
+            # Цена fast
+            context['result_price_fast'] = (min(list_distance_fast)/v_fast)*2*price_list_fast + int(self.object.price)
+            
+            # Уведомление о том, что пунктов выдачи нет
             context['notifiction'] = 'В вашем городе нет нашего пункта выдачи, поэтому доставка дороже :('
+        context['form'] = SearchProductForm()
         return context

@@ -24,5 +24,5 @@ media/
 .env
 
 # other
-Расстояния.xlsx
-Расстояния_воздух.xlsx
+Расстояния_econom.xlsx
+Расстояния_fast.xlsx
