@@ -50,19 +50,17 @@
     <div class="products">
         <div class="products-main container">
             <h1 class="products__title">Результаты поиска по запросу: <b class="title__value">{{ search_word }}</b></h1>
-            <div class="products__filters">
-                <form method='get'>
-                    <div class="filters__filter">
-                        <div class="filter__name">Цена От:</div>
-                        {{ filterset.form.min_price}}
-                    </div>
-                    <div class="filters__filter">
-                        <div class="filter__name">Цена До:</div>
-                        {{ filterset.form.max_price }}
-                    </div>
-                    <button type='submit' class="filters__accept">Применить</button>
-                </form>
-            </div>
+            <form method='get' class="products__filters">
+                <div class="filters__filter">
+                    <div class="filter__name">Цена От:</div>
+                    {{ filterset.form.min_price}}
+                </div>
+                <div class="filters__filter">
+                    <div class="filter__name">Цена До:</div>
+                    {{ filterset.form.max_price }}
+                </div>
+                <button type='submit' class="filters__accept">Применить</button>
+            </form>
             <div class="products__list">
                 {% for product in page_obj %}
                 <div class="list__product">
