@@ -1,5 +1,5 @@
 .hero {
-    background: url(../images/Pattern.svg);
+    background: url('/static/accounts/img/Pattern.svg');
     background-color: var(--accent50);
 }
 .hero-main {

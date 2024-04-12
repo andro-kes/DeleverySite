@@ -29,7 +29,7 @@ class ProfileUpdateView(UpdateView):
     def get_context_data(self, **kwargs: Any):
         context =  super().get_context_data(**kwargs)
         context['cities'] = Cities.objects.all()
-        context['cart'] = UserCartModel.objects.filter(user=self.request.user)
+        context['cart'] = UserCartModel.objects.get(user=self.request.user).products.all()
         context['form_search'] = SearchProductForm()
         return context
     

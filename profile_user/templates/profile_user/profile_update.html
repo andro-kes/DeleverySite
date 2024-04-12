@@ -96,8 +96,8 @@
         <div class="orders">
             <div class="orders-main container">
                 <div class="order">
-                    {% for product in cart %}
-                        {% for order in product.products.all %}
+                        {{ cart }}
+                        {% for order in cart %}
                             <div class="order__image" data-imgurl="{{ order.picture.url }}"></div>
                             <div class="order__info">
                                 <div class="info__text">
@@ -107,7 +107,6 @@
                                 <div class="order__status">{{ order.status }}</div>
                             </div>
                         {% endfor %}
-                    {% endfor %}
                 </div>
             </div>
         </div>
