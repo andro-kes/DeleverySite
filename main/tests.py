@@ -24,7 +24,7 @@ class OrderModelTests(TestCase):
             company=user,
             category='test_category',
         )
-        order.warehouse.add(city)
+        order.list_warehouse.add(city)
         order.save()
 
     def test_order_model(self):
@@ -37,8 +37,8 @@ class OrderModelTests(TestCase):
         self.assertEqual(order.description, 'Test product description')
         self.assertEqual(order.category, 'test_category')
         self.assertEqual(str(order), 'Test Product')
-        self.assertTrue(isinstance(order.warehouse.all()[0], Cities))
-        self.assertEqual(order.warehouse.all()[0].name, 'Test City')
+        self.assertTrue(isinstance(order.list_warehouse.all()[0], Cities))
+        self.assertEqual(order.list_warehouse.all()[0].name, 'Test City')
 
     def test_order_str(self):
         order = OrderModel.objects.get(id=1)

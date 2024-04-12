@@ -6,6 +6,10 @@ from django.urls import reverse_lazy
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+
+ALLOWED_HOSTS = ['9330-37-78-21-119.ngrok-free.app',  '127.0.0.1', 'localhost']
+
+CSRF_TRUSTED_ORIGINS = ['https://9330-37-78-21-119.ngrok-free.app']
 # Secret_Key
 dotenv_path = os.path.join(BASE_DIR, '.env')
 load_dotenv(dotenv_path)
@@ -13,9 +17,6 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
-ALLOWED_HOSTS = []
-
 
 # Application definition
 
