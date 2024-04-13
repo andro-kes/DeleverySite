@@ -1,5 +1,5 @@
 .hero {
-    background: url(../images/Pattern.svg);
+    background: url('/static/accounts/img/Pattern.svg');
     background-color: var(--accent50);
 }
 .hero-main {
@@ -193,9 +193,6 @@
 .guide__card-text a:hover {
     background-color: var(--accent-color);
     color: #fff;
-}
-.pp_doc {
-
 }
 .pp_text {
     margin-top: 1rem;

@@ -30,6 +30,7 @@ window.onload = () => {
             const associatedLabel = radioButton.previousElementSibling;
             if (associatedLabel.textContent.trim() === statusValue) {
                 radioButton.checked = true;
+                associatedLabel.classList.add("_active");
             };
             radioButton.onclick = () => {
                 let radioGroup = radioButton.dataset.group;

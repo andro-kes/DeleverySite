@@ -120,7 +120,7 @@
                     <p>Шаг 3. Отслеживайте статус доставки заказа.</p>
                 </div>
                 <div class="guide__card-image">
-                    <img src="assets/images/Pattern.svg" alt="">
+                    <img src="{% static '/accounts/img/Pattern.svg' %}" alt="">
                 </div>
             </div>
             <div class="guide__card">
@@ -131,7 +131,7 @@
                     <p>Этап 3. Заказ прибыл в пункт выдачи и ожидает получения.</p>
                 </div>
                 <div class="guide__card-image">
-                    <img src="assets/images/Pattern.svg" alt="">
+                    <img src="{% static '/accounts/img/Pattern.svg' %}" alt="">
                 </div>
             </div>
             <div class="guide__card">
@@ -146,7 +146,7 @@
                     </a>
                 </div>
                 <div class="guide__card-image">
-                    <img src="assets/images/Pattern.svg" alt="">
+                    <img src="{% static '/accounts/img/Pattern.svg' %}" alt="">
                 </div>
             </div>
         </div>
@@ -157,9 +157,7 @@
             <div class="footer__nav">
                 <a href="{% url 'main' %}">Главная</a>
                 <a href="{% url 'main' %}">О доставке</a>
-                <a href="/privacy-policy.html">Политика конфиденциальности</a>
-                <a href="/contacts.html">Контакты</a>
-                <a href="#">FAQ</a>
+                <a href="{% url 'privacy_policy' %}">Политика конфиденциальности</a>
             </div>
         </div>
     </div>

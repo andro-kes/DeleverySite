@@ -16,7 +16,8 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .filters import OrderFilter
 from django.views.generic.edit import CreateView
 from accounts.models import Cities
-from django.urls import reverse_lazy
+import random
+import re
 
 class MainView(View):
     """ 
@@ -44,14 +45,24 @@ class MainView(View):
 class CreateOrderView(CreateView):
     template_name = 'main/create.html'
     form_class = CreateOrderForm
-    success_url = '/create'
+    success_url = 'main/orders_company.html'
+    
+    @classmethod
+    def get_number(self):
+        # Генерируем случайную строку из 12 цифр
+        random_number = ''.join(str(random.randint(0, 9)) for _ in range(12))
+
+        # Форматируем строку в формате ****-****-****
+        formatted_number = re.sub(r'(\d{4})(\d{4})(\d{4})', r'\1-\2-\3', random_number)
+
+        return formatted_number
     
     def form_valid(self, form: BaseModelForm):
         form.instance.company = self.request.user
         form.instance.picture1 = self.request.FILES.get('picture1')
-        print(self.request.FILES)
         form.instance.picture2 = self.request.FILES.get('picture2')
         form.instance.picture3 = self.request.FILES.get('picture3')
+        form.instance.number = self.get_number()
         form.save()
         return super().form_valid(form)
 
