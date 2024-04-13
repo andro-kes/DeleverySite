@@ -22,13 +22,15 @@
         <div class="header-main container">
             <a href="{% url 'main' %}" class="header__logo">Kodopes</a>
             <div class="header-side">
-                <form class="header__search" method="post" action="{% url 'main' %}">
-                    {% csrf_token %}
-                    {{ form_search.search_field }}
-                    <button type="submit">
-                        <img src="{% static 'accounts/img/ui/search.svg' %}" alt="Искать">
-                    </button>
-                </form>
+                {% if user.status == 'Покупатель' %}
+                    <form class="header__search" method="post">
+                        {% csrf_token %}
+                        {{ form.search_field }}
+                        <button type="submit">
+                            <img src="{% static 'accounts/img/ui/search.svg' %}" alt="Искать">
+                        </button>
+                    </form>
+                {% endif %}
                 <div class="header__nav">
                     <a href="{% url 'signup' %}" class="nav__account">
                         <img src="{% static '/accounts/img/ui/user.svg' %}" alt="Аккаунт">
@@ -43,8 +45,9 @@
     <div class="cataloque">
         <div class="cataloque-main container">
             <div class="cataloque__nav">
-                <a href="#">Товары</a>
-                <a href="#">Заказы</a>
+                {% if user.status == 'Комания' %}
+                    <a href="{% url 'create' %}">Заказы</a>
+                {% endif %}
             </div>
         </div>
     </div>

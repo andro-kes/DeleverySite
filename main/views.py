@@ -299,3 +299,6 @@ class OrdersListView(ListView):
             order.status = status
             order.save()
         return redirect('orders')
+    
+def privacy_policy(request):
+    return render(request, 'main/privacy_policy.html')
