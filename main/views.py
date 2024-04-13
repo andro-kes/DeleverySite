@@ -1,10 +1,11 @@
 from typing import Any
+from django.db.models.query import QuerySet
 from django.forms import BaseModelForm
 from django.shortcuts import render, redirect 
 from django.http import HttpResponse, JsonResponse
 from django.views.generic.base import View
 from django.views.generic.detail import DetailView
-from .forms import SearchProductForm, CreateOrderForm
+from .forms import SearchProductForm, CreateOrderForm, ChangeStatusForm
 from .models import OrderModel, UserCartModel
 from django.views.generic.list import ListView
 from django.contrib.auth.decorators import login_required
@@ -15,6 +16,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .filters import OrderFilter
 from django.views.generic.edit import CreateView
 from accounts.models import Cities
+from django.urls import reverse_lazy
 
 class MainView(View):
     """ 
@@ -264,5 +266,36 @@ class ProductDetailView(DetailView):
             
             # Уведомление о том, что пунктов выдачи нет
             context['notifiction'] = 'В вашем городе нет нашего пункта выдачи, поэтому доставка дороже :('
+            
+        # Если город, пункт выдачи и склад - один и тот же город, то доставка не требуется
+        if int(context['econom']) == 0:
+            context['notifiction'] = 'Пункт выдачи в вашем городе готов выдать вам заказ'
+            context['econom'] = 'Готов к выдаче'
+            context['result_price_econom'] = 'Готов к выдаче'
+            context['fast'] = 'Готов к выдаче'
+            context['result_price_fast'] = 'Готов к выдаче'
+            
         context['form'] = SearchProductForm()
         return context
+    
+class OrdersListView(ListView):
+    template_name = 'main/orders_company.html'
+    
+    def get_queryset(self):
+        return OrderModel.objects.filter(company=self.request.user)
+    
+    def get_context_data(self, **kwargs: Any):
+        context = super().get_context_data(**kwargs)
+        context['orders'] = self.get_queryset()
+        context['form'] = ChangeStatusForm()
+        return context
+    
+    def post(self, request, *args, **kwargs):
+        form = ChangeStatusForm(request.POST)
+        if form.is_valid():
+            status = form.cleaned_data['status']
+            number = form.cleaned_data['number']
+            order = OrderModel.objects.get(number=number)
+            order.status = status
+            order.save()
+        return redirect('orders')

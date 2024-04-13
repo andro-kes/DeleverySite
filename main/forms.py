@@ -36,3 +36,7 @@ class CreateOrderForm(forms.ModelForm):
             'status': forms.TextInput(attrs={'hidden': True}),
             'description': forms.TextInput(attrs={'placeholder': 'Описание'}),
         }
+        
+class ChangeStatusForm(forms.Form):
+    number = forms.CharField()
+    status = forms.CharField()

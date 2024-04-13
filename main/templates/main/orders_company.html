@@ -1,15 +1,17 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <link rel="stylesheet" href="assets/css/reset.css">
-    <link rel="stylesheet" href="assets/css/fonts.css">
-    <link rel="stylesheet" href="assets/css/header.css">
-    <link rel="stylesheet" href="assets/css/orders.css">
-    <link rel="stylesheet" href="assets/css/main.css">
-    <link rel="stylesheet" href="assets/css/footer.css">
+    <link rel="stylesheet" href="{% static 'main/css/orders.css' %}">
+    <link rel="stylesheet" href="{% static '/accounts/css/reset.css' %}">
+    <link rel="stylesheet" href="{% static '/accounts/css/fonts.css' %}">
+    <link rel="stylesheet" href="{% static '/accounts/css/header.css' %}">
+    <link rel="stylesheet" href="{% static '/accounts/css/index.css' %}">
+    <link rel="stylesheet" href="{% static '/accounts/css/main.css' %}">
+    <link rel="stylesheet" href="{% static '/accounts/css/footer.css' %}">  
 
     <title>Hack2024</title>
 </head>
@@ -18,18 +20,25 @@
         <div class="header-main container">
             <a href="/index.html" class="header__logo">Kodopes</a>
             <div class="header-side">
-                <form class="header__search">
-                    <input type="text" required placeholder="Поиск">
-                    <button>
-                        <img src="assets/images/ui/search.svg" alt="Искать">
+                <form class="header__search" method="post" action="{% url 'main' %}">
+                    {% csrf_token %}
+                    {{ form.search_field }}
+                    <button type="submit">
+                        <img src="{% static 'accounts/img/ui/search.svg' %}" alt="Искать">
                     </button>
                 </form>
                 <div class="header__nav">
-                    <a href="/registry.html" class="nav__account">
-                        <img src="assets/images/ui/user.svg" alt="Аккаунт">
+                    {% if user.is_authenticated %}
+                    <a href="{% url 'profile_update' user.id %}" class="nav__account">
+                        <img src="{% static 'accounts/img/ui/user.svg' %}" alt="Аккаунт">
                     </a>
+                    {% else %}
+                     <a href="{% url 'signup' %}" class="nav__account">
+                        <img src="{% static 'accounts/img/ui/user.svg' %}" alt="Аккаунт">
+                    </a>
+                    {% endif %}
                     <a href="#" class="nav__vk">
-                        <img src="assets/images/ui/vk.svg" alt="VK">
+                        <img src="{% static 'accounts/img/ui/vk.svg' %}" alt="VK">
                     </a>
                 </div>
             </div>
@@ -45,74 +54,41 @@
     </div>
     
     <div class="orders">
-        <form class="orders-main container">
+        <div class="orders-main container">
             <div class="orders__title">Заказы:</div>
-            <div class="orders__list">
-                <div class="list__order">
-                    <div class="order__number">Заказ №322-000321</div>
-                    <div class="order__status">
-                        <div class="status__title">Изменить статус: </div>
-                        <div class="order__statuses">
-                            <label>
-                                <div class="status__btn _active" data-group="1">Формируется</div>
-                                <input type="radio" name="1" checked>
-                            </label>
-                            <label>
-                                <div class="status__btn" data-group="1">Передано в доставку</div>
-                                <input type="radio" name="1">
-                            </label>
-                            <label>
-                                <div class="status__btn" data-group="1">Ожидает получения</div>
-                                <input type="radio" name="1">
-                            </label>
+            {% for order in orders %}
+                <form class="orders__list" method="post">
+                    {% csrf_token %}
+                    <div class="list__order">
+                        <div class="order__number" id='order_number'>{{ order.number }}</div>
+                        <div class="order__status">
+                            <div class="status__title">Изменить статус: </div>
+                            <div id='order_status'>{{ order.status }}</div>
+                            <div class="order__statuses">
+                                <label>
+                                    <div class="status__btn _active" data-group="1">Выставлен</div>
+                                    <input type="radio" name="1">
+                                </label>
+                                <label>
+                                    <div class="status__btn" data-group="1">Передано в доставку</div>
+                                    <input type="radio" name="1">
+                                </label>
+                                <label>
+                                    <div class="status__btn" data-group="1">Ожидает получения</div>
+                                    <input type="radio" name="1">
+                                </label>
+                            </div>
+                            {{ form.status }}
+                            {{ form.number }}
                         </div>
                     </div>
-                </div>
-                <div class="list__order">
-                    <div class="order__number">Заказ №322-000322</div>
-                    <div class="order__status">
-                        <div class="status__title">Изменить статус: </div>
-                        <div class="order__statuses">
-                            <label>
-                                <div class="status__btn _active" data-group="2">Формируется</div>
-                                <input type="radio" name="2" checked>
-                            </label>
-                            <label>
-                                <div class="status__btn" data-group="2">Передано в доставку</div>
-                                <input type="radio" name="2">
-                            </label>
-                            <label>
-                                <div class="status__btn" data-group="2">Ожидает получения</div>
-                                <input type="radio" name="2">
-                            </label>
-                        </div>
-                    </div>
-                </div>
-                <div class="list__order">
-                    <div class="order__number">Заказ №322-000323</div>
-                    <div class="order__status">
-                        <div class="status__title">Изменить статус: </div>
-                        <div class="order__statuses">
-                            <label>
-                                <div class="status__btn _active" data-group="3">Формируется</div>
-                                <input type="radio" name="3" checked>
-                            </label>
-                            <label>
-                                <div class="status__btn" data-group="3">Передано в доставку</div>
-                                <input type="radio" name="3">
-                            </label>
-                            <label>
-                                <div class="status__btn" data-group="3">Ожидает получения</div>
-                                <input type="radio" name="3">
-                            </label>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <button class="orders__confirm">
-                Применить
-            </button>
-        </form>
+                    <button class="orders__confirm" type='submit'>
+                        Применить
+                    </button>
+                </form>
+            {% endfor %}
+            
+        </div>
     </div>
 
     <div class="footer">
@@ -128,6 +104,6 @@
         </div>
     </div>
 
-    <script src="assets/js/orders.js"></script>
+    <script src="{% static 'main/js/orders.js' %}"></script>
 </body>
 </html>
