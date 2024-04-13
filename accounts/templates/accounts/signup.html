@@ -45,6 +45,7 @@
 
             <!-- Покупатель -->
             <form class="registry__tab _customer_tab tab_active" method="post">
+                {{ form.errors }}
                 {% csrf_token %}
                 <div class="field_line">
                     <div class="form__field">
@@ -89,6 +90,7 @@
 
             <!-- Компания -->
             <form class="registry__tab _company_tab" method="post">
+                {{ form.errors }}
                 {% csrf_token %}
                 <div class="field_line">
                     <div class="form__field">

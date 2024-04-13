@@ -55,8 +55,9 @@
     <div class="cataloque">
         <div class="cataloque-main container">
             <div class="cataloque__nav">
-                {% if user.status == 'Комания' %}
-                    <a href="{% url 'create' %}">Заказы</a>
+                {% if user.status == 'Компания' %}
+                    <a href="{% url 'orders' %}">Заказы</a>
+                    <a href="{% url 'create' %}">Создать заказ</a>
                 {% endif %}
             </div>
         </div>

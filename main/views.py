@@ -44,7 +44,7 @@ class MainView(View):
 class CreateOrderView(CreateView):
     template_name = 'main/create.html'
     form_class = CreateOrderForm
-    success_url = '/'
+    success_url = '/create'
     
     def form_valid(self, form: BaseModelForm):
         form.instance.company = self.request.user
