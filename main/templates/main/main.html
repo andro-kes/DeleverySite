@@ -45,7 +45,7 @@
                         <img src="{% static 'accounts/img/ui/user.svg' %}" alt="Аккаунт">
                     </a>
                     {% endif %}
-                    <a href="#" class="nav__vk">
+                    <a href="https://vk.com/code_rocks_hack_2024" class="nav__vk">
                         <img src="{% static 'accounts/img/ui/vk.svg' %}" alt="VK">
                     </a>
                 </div>
@@ -63,7 +63,7 @@
         </div>
     </div>
     <div class="hero">
-        <div class="hero-main container">
+        <div class="hero-main container wow" data-style="fade_left">
             <h1 class="hero__title">Заказывайте товары и отслеживайте этапы доставки.</h1>
             <p class="hero__subtitle">Удобный интерфейс для отслеживания статуса заказа.</p>
             <a href="#" class="hero__action">начать!</a>
@@ -71,12 +71,12 @@
     </div>
     <div class="offers">
         <div class="offers-main container">
-            <div class="offers__dscr">
+            <div class="offers__dscr wow" data-style="fade_right">
                 <h1 class="offers__title">Различные варианты доставки.</h1>
                 <p class="offers__subtitle">Подходящий вариант для каждого.</p>
                 <a href="#" class="offers__action">о доставке!</a>
             </div>
-            <div class="offers__list">
+            <div class="offers__list wow" data-style="fade_right">
                 <div class="offer__card">
                     <h2 class="card__title">Econom</h2>
                     <ul class="card__props">
@@ -113,29 +113,29 @@
     <div class="guide">
         <div class="guide-main container">
             <div class="guide__card">
-                <div class="guide__card-text">
+                <div class="guide__card-text wow" data-style="fade_left">
                     <h1>Как пользоваться?</h1>
                     <p>Шаг 1. Добавьте Ваш товар в корзину.</p>
                     <p>Шаг 2. Выберите оптимальный способ доставки.</p>
                     <p>Шаг 3. Отслеживайте статус доставки заказа.</p>
                 </div>
-                <div class="guide__card-image">
+                <div class="guide__card-image wow" data-style="fade_right">
                     <img src="{% static '/accounts/img/Pattern.svg' %}" alt="">
                 </div>
             </div>
             <div class="guide__card">
-                <div class="guide__card-text">
+                <div class="guide__card-text wow" data-style="fade_left">
                     <h1>Этапы доставки:</h1>
                     <p>Этап 1. Формирование заказа.</p>
                     <p>Этап 2. Передача заказа курьеру. Заказ в пути.</p>
                     <p>Этап 3. Заказ прибыл в пункт выдачи и ожидает получения.</p>
                 </div>
-                <div class="guide__card-image">
+                <div class="guide__card-image wow" data-style="fade_right">
                     <img src="{% static '/accounts/img/Pattern.svg' %}" alt="">
                 </div>
             </div>
             <div class="guide__card">
-                <div class="guide__card-text">
+                <div class="guide__card-text wow" data-style="fade_right">
                     <h1>Почему именно мы?</h1>
                     <p>1. Прозрачный рабочий процесс.</p>
                     <p>2. Надежная доставка большим количеством проверенных курьеров.</p>
@@ -145,7 +145,7 @@
                         начать!
                     </a>
                 </div>
-                <div class="guide__card-image">
+                <div class="guide__card-image wow" data-style="fade_left">
                     <img src="{% static '/accounts/img/Pattern.svg' %}" alt="">
                 </div>
             </div>
@@ -161,5 +161,8 @@
             </div>
         </div>
     </div>
+
+    <script src="{% static 'main/js/header.js' %}"></script>
+    <script src="{% static 'main/js/wow.js' %}"></script>
 </body>
 </html>
