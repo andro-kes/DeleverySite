@@ -220,7 +220,6 @@ class ProductDetailView(DetailView):
         context =  super().get_context_data(**kwargs) 
          
         # Получаем город пользователя
-        print(self.request.user.address.all())
         address = self.request.user.address.all()[0].name
         
         # Получим склады товара
@@ -256,6 +255,7 @@ class ProductDetailView(DetailView):
         if address in list_pick_up_point:
             # Время для econom
             context['econom'] = min(list_distance_econom)/v_econom
+            print(min(list_distance_econom))
             # Цена econom 
             context['result_price_econom'] = (min(list_distance_econom)/v_econom)*price_list_econom + int(self.object.price)
             
@@ -279,12 +279,13 @@ class ProductDetailView(DetailView):
             context['notifiction'] = 'В вашем городе нет нашего пункта выдачи, поэтому доставка дороже :('
             
         # Если город, пункт выдачи и склад - один и тот же город, то доставка не требуется
-        if int(context['econom']) == 0:
-            context['notifiction'] = 'Пункт выдачи в вашем городе готов выдать вам заказ'
+        print(context['econom'])
+        if context['econom'] <= 0:
+            context['notifiction'] = 'Пункт выдачи в вашем городе готов выдать заказ'
             context['econom'] = 'Готов к выдаче'
-            context['result_price_econom'] = 'Готов к выдаче'
+            context['result_price_econom'] = int(self.object.price)
             context['fast'] = 'Готов к выдаче'
-            context['result_price_fast'] = 'Готов к выдаче'
+            context['result_price_fast'] = int(self.object.price)
             
         context['form'] = SearchProductForm()
         return context

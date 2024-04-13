@@ -27,7 +27,7 @@
             <a href="{% url 'main' %}" class="header__logo">Kodopes</a>
             <div class="header-side">
                 {% if user.status == 'Покупатель' %}
-                    <form class="header__search" method="post">
+                    <form class="header__search" method="post" action='{% url "main" %}'>
                         {% csrf_token %}
                         {{ form.search_field }}
                         <button type="submit">

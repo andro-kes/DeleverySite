@@ -23,9 +23,9 @@
             <a href="{% url 'main' %}" class="header__logo">Kodopes</a>
             <div class="header-side">
                 {% if user.status == 'Покупатель' %}
-                    <form class="header__search" method="post">
+                    <form class="header__search" method="post" action='{% url "main" %}'>
                         {% csrf_token %}
-                        {{ form.search_field }}
+                        {{ form_search.search_field }}
                         <button type="submit">
                             <img src="{% static 'accounts/img/ui/search.svg' %}" alt="Искать">
                         </button>
@@ -99,19 +99,18 @@
         <!-- Корзина -->
         <div class="orders">
             <div class="orders-main container">
-                <div class="order">
-                        {{ cart }}
-                        {% for order in cart %}
-                            <div class="order__image" data-imgurl="{{ order.picture.url }}"></div>
-                            <div class="order__info">
-                                <div class="info__text">
-                                    <h2 class="info__title">{{ order.number }}</h2>
-                                    <div class="info__name">{{ order.name }}</div>
-                                </div>
-                                <div class="order__status">{{ order.status }}</div>
+                {% for order in cart %}
+                    <div class="order">
+                        <div class="order__image" data-imgurl="{{ order.picture1.url }}"></div>
+                        <div class="order__info">
+                            <div class="info__text">
+                                <h2 class="info__title">{{ order.number }}</h2>
+                                <div class="info__name">{{ order.name }}</div>
                             </div>
-                        {% endfor %}
-                </div>
+                            <div class="order__status">{{ order.status }}</div>
+                        </div> 
+                    </div>
+                {% endfor %}
             </div>
         </div>
     </div>
