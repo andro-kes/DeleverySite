@@ -14,6 +14,7 @@ class OrderModel(models.Model):
     description = models.CharField(max_length=250)
     number = models.CharField(max_length=14, null=True, blank=True)
     status = models.CharField(max_length=20, null=True)
+    delevery = models.CharField(max_length=10, null=True, blank=True)
     
     # компания, которой принадлежит товар
     company = models.ForeignKey('accounts.AccountsModel', on_delete=models.CASCADE, blank=True, null=True)

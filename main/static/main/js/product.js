@@ -1,5 +1,15 @@
 let main = document.querySelector(".slider__main img");
 let subs = document.querySelectorAll(".slider__sub img");
+
+const priceInput = document.querySelector('#order_price');
+priceInput.value = document.getElementById('result_price').innerHTML = document.getElementById('result_price').innerHTML
+const deleveryInput = document.querySelector('#order_delevery');
+deleveryInput.value = 'Econom';
+const statusInput = document.querySelector('#order_status');
+statusInput.value = 'Заказан'
+const numberInput = document.querySelector('#order_number');
+numberInput.value = document.querySelector('#number_id').textContent;
+
 subs.forEach(sub => {
     sub.onclick = () => {
         subs.forEach(s => {
@@ -17,5 +27,7 @@ deliveryOptions.forEach(opt => {
         document.querySelector(".delivery input").value = opt.dataset.val;
         document.querySelector(".info__date b").innerHTML = opt.dataset.date;
         document.getElementById('result_price').innerHTML = opt.dataset.price;
+        priceInput.value = opt.dataset.price;
+        deleveryInput.value = opt.textContent;
     }    
 });

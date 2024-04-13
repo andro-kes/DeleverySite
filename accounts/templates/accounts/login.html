@@ -39,6 +39,7 @@
 
             <form class="registry__tab tab_active" method="post" action="{% url 'login' %}">
                 {% csrf_token %}
+                {{ form.errors }}
                 <div class="form__field">
                     <h2 class="tab__title">E-mail:</h2>
                     {{ form.username }}

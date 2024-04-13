@@ -5,7 +5,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
 from django.views.generic.base import View
 from django.views.generic.detail import DetailView
-from .forms import SearchProductForm, CreateOrderForm, ChangeStatusForm
+from .forms import SearchProductForm, CreateOrderForm, ChangeStatusForm, OrderProductForm
 from .models import OrderModel, UserCartModel
 from django.views.generic.list import ListView
 from django.contrib.auth.decorators import login_required
@@ -18,6 +18,7 @@ from django.views.generic.edit import CreateView
 from accounts.models import Cities
 import random
 import re
+from django.urls import reverse_lazy
 
 class MainView(View):
     """ 
@@ -36,7 +37,7 @@ class MainView(View):
             value = form.cleaned_data['search_field']
         # находим товары, содержащие данную категорию
         
-        queryset = OrderModel.objects.filter(category__icontains=value)
+        queryset = OrderModel.objects.filter(category__icontains=value, status='Выставлен')
         # получаем айди всех найденных элементов
         request.session['queryset_ids'] = list(queryset.values_list('id', flat=True))
         request.session['search_word'] = value
@@ -45,7 +46,7 @@ class MainView(View):
 class CreateOrderView(CreateView):
     template_name = 'main/create.html'
     form_class = CreateOrderForm
-    success_url = 'main/orders_company.html'
+    success_url = reverse_lazy('orders')
     
     @classmethod
     def get_number(self):
@@ -89,7 +90,7 @@ class ResultsView(ListView):
         page = self.request.GET.get('page')
         queryset = self.get_queryset()
         filterset = self.filterset_class(self.request.GET, queryset=queryset)
-        paginator = Paginator(filterset.qs, 10)  # количество объектов на странице
+        paginator = Paginator(filterset.qs, 3)  # количество объектов на странице
         try:
             objects = paginator.page(page)
         except PageNotAnInteger:
@@ -288,7 +289,22 @@ class ProductDetailView(DetailView):
             context['result_price_fast'] = int(self.object.price)
             
         context['form'] = SearchProductForm()
+        context['order_form'] = OrderProductForm()
         return context
+    
+def order_product(request):
+    form = OrderProductForm(request.POST)
+    if form.is_valid():
+        status = form.cleaned_data['status']
+        id_order = form.cleaned_data['number']
+        price = form.cleaned_data['price']
+        delevery = form.cleaned_data['delevery']
+        order = OrderModel.objects.get(id=id_order)
+        order.status = status
+        order.price = float(price.split(' ')[0].replace(',', '.'))
+        order.delevery = delevery
+        order.save()
+    return redirect(reverse_lazy('profile_update', args=[order.id]))
     
 class OrdersListView(ListView):
     template_name = 'main/orders_company.html'

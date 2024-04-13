@@ -40,3 +40,9 @@ class CreateOrderForm(forms.ModelForm):
 class ChangeStatusForm(forms.Form):
     number = forms.CharField()
     status = forms.CharField()
+    
+class OrderProductForm(forms.Form):
+    status = forms.CharField(widget=forms.TextInput(attrs={'id': 'order_status'}))
+    price = forms.CharField(widget=forms.TextInput(attrs={'id': 'order_price'}))
+    number = forms.CharField(widget=forms.TextInput(attrs={'id': 'order_number'}))
+    delevery = forms.CharField(widget=forms.TextInput(attrs={'id': 'order_delevery'}))

@@ -84,6 +84,9 @@
                         {% endif%}
                     </div>
                 </div>
+
+                
+
                 <div class="product__info">
                     <div class="info__text">
                         Описание: {{ product.description }}
@@ -109,7 +112,17 @@
                     <div class="info__date" id="delivery_date">Доставим через: <b>{{ econom }} часов</b></div>
                     <div class="info__date" id="delivery_date">{{ notifiction }}</div>
                     <div class="info__buy">
-                        <div class="info__price" id='result_price'>{{ result_price_econom }} руб</div>
+                        <form action="{% url 'order_product' %}" method="post">
+                            {% csrf_token %}
+                            <div hidden>
+                                {{ order_form.price }}
+                                {{ order_form.delevery }}
+                                {{ order_form.status }}
+                                {{ order_form.number }}
+                                <div id="number_id">{{ product.id }}</div>  
+                            </div>
+                            <button type="submit" class="info__price" id='result_price'>{{ result_price_econom }} руб</button>
+                        </form>
                         <button><a href="{% url 'add_to_cart' %}" id="{{ product.id }}" class="add-to-cart-btn">В корзину</a></button>
                     </div>
                 </div>
@@ -132,6 +145,6 @@
     <script src="{% static 'main/js/add_to_cart.js' %}"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>    
     <script src="https://cdn.jsdelivr.net/npm/js-cookie@3/dist/js.cookie.min.js"></script>
-    <script src="{% static 'main/js/header.js' %}"
+    <script src="{% static 'main/js/header.js' %}"></script>
 </body>
 </html>

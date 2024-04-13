@@ -114,5 +114,18 @@
     <script src="{% static 'main/js/add_to_cart.js' %}"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>    
     <script src="https://cdn.jsdelivr.net/npm/js-cookie@3/dist/js.cookie.min.js"></script>
+    <script>
+        window.onload = () => {
+            document.querySelectorAll(".filters__filter input").forEach((i_elem, i_index) => {
+                if (i_index == 0) {
+                    i_elem.setAttribute("placeholder", "0");
+                }
+                if (i_index == 1) {
+                    i_elem.setAttribute("placeholder", "999999");
+                }
+
+            });
+        };
+    </script>
 </body>
 </html>
