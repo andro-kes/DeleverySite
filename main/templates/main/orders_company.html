@@ -20,6 +20,12 @@
         <div class="header-main container">
             <a href="/index.html" class="header__logo">Kodopes</a>
             <div class="header-side">
+                <form class="header__search">
+                    <input type="text" id="searchInput" placeholder="Введите номер заказа">
+                    <button type="button">
+                        <img src="{% static 'accounts/img/ui/search.svg' %}" alt="Искать" id="search_button">
+                    </button>
+                </form>
                 <div class="header__nav">
                     {% if user.is_authenticated %}
                     <a href="{% url 'profile_update' user.id %}" class="nav__account">
@@ -86,10 +92,10 @@
                                 {{ form.number }}
                             </div>
                         </div>
+                        <button class="orders__confirm" type='submit'>
+                            Применить
+                        </button>
                     </div>
-                    <button class="orders__confirm" type='submit'>
-                        Применить
-                    </button>
                 </form>
             {% endfor %}
             

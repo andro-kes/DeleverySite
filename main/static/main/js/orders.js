@@ -44,6 +44,22 @@ window.onload = () => {
     });
 }
 
+document.getElementById('search_button').addEventListener('click', () => {
+    let searchInput = document.querySelector('#searchInput');
+    const orderList = document.querySelectorAll('.orders__list');
+    const searchValue = searchInput.value.trim().toLowerCase();
+  
+    orderList.forEach((order) => {
+        const orderNumber = order.querySelector('.order__number').textContent.trim().toLowerCase();
 
+        if (orderNumber.includes(searchValue)) {
+            order.style.display = '';
+        } else {
+            order.style.display = 'none';
+        };
+    searchInput.value = '';
+    });
+});
+  
 
 
